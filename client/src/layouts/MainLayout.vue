@@ -60,25 +60,25 @@ const linksList = [
     title: 'Query 2',
     caption: 'caption 2',
     icon: 'code',
-    link: 'https://github.com/quasarframework'
+    link: '#/'
   },
   {
     title: 'Query 3',
     caption: 'caption 3',
     icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    link: '#/'
   },
   {
     title: 'Query 4',
     caption: 'caption 4',
     icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    link: '#/'
   },
   {
     title: 'Query 5',
     caption: 'caption 5',
     icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    link: '#/'
   }
 ]
 
