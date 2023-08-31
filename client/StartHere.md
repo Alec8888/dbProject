@@ -3,12 +3,8 @@
 ## Server: 
 - Install node.js v18.17.1 
   - https://nodejs.org/en/download/current
-- install oracledb for node in the server directory
-  - npm install oracledb
-- install cors for node in the server directory
-  - npm install cors
-- install express for node in the server directory
-  - npm install express
+- Install modules in server directory
+  - npm install
 - Log into Orcal with SQL Developer. Create a table DEMOTABLE using the UI
 - Edit the table and add three columns.
 - Insert some data into the table.
