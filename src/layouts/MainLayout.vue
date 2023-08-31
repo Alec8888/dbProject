@@ -57,32 +57,32 @@ const linksList = [
     link: 'https://quasar.dev'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
+    title: 'Query 1',
+    caption: 'Page for the first query',
     icon: 'code',
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'Query 2',
+    caption: 'Page for the second query',
     icon: 'chat',
     link: 'https://chat.quasar.dev'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
+    title: 'Query 3',
+    caption: 'Page for the third query',
     icon: 'record_voice_over',
     link: 'https://forum.quasar.dev'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
+    title: 'Query 4',
+    caption: 'Page for the fourth query',
     icon: 'rss_feed',
     link: 'https://twitter.quasar.dev'
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
+    title: 'Query 5',
+    caption: 'Page for the fifth query',
     icon: 'public',
     link: 'https://facebook.quasar.dev'
   },
