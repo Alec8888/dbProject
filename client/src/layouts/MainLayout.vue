@@ -51,46 +51,34 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
+    title: 'Query 1',
+    caption: 'caption 1',
     icon: 'school',
-    link: 'https://quasar.dev'
+    link: '#/queryOne'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
+    title: 'Query 2',
+    caption: 'caption 2',
     icon: 'code',
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'Query 3',
+    caption: 'caption 3',
     icon: 'chat',
     link: 'https://chat.quasar.dev'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
+    title: 'Query 4',
+    caption: 'caption 4',
     icon: 'record_voice_over',
     link: 'https://forum.quasar.dev'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
+    title: 'Query 5',
+    caption: 'caption 5',
     icon: 'rss_feed',
     link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
   }
 ]
 
