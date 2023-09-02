@@ -28,14 +28,16 @@ here's what I inserted in my example:
 INSERT INTO DEMOTABLE (COLUMN1,COLUMN2,COLUMN3) 
 VALUES ('demo2', 5, TO_DATE('1/2/2023', 'MM/DD/YYYY'))
 - In our projec find ./server/server.js and enter your user and pwd for UF oracal db
-## Run App
+## Start App
 ### Server
 - run server.js from server directory  
   ``` node server.js ```
+- Leave the terminal window open.
 ### Client
+- Open a new termial window that is not powershell
 - Start dev server from client directory  
   ``` quasar dev ```
   - website should launch after command
-  - if you are using powershell and get an error "Unknown command dev", use cmd instead (or any other terminal)
-
+## Check out the website
+If you click the button on the home page, records stored in the oracle db are displayed.
 
