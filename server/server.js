@@ -1,5 +1,12 @@
-// http server, serves files from a local folder
+// This is the main server file that will run the backend code
 
+// Environment variables for db connection
+require('dotenv').config();
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
+
+
+// EXPRESS 
 const express = require('express');
 const app = express();
 
@@ -23,8 +30,8 @@ app.use(function (req, res, next) {
 // connect to DB config
 const oracledb = require('oracledb');
 let connectionConfig = {
-  user: "userName",
-  password: "Password",
+  user: "dbUser",
+  password: "dbPassword",
   connectString: "oracle.cise.ufl.edu:1521/orcl"  // Typically in 'hostname:port/serviceName' format
 };
 

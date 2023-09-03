@@ -36,3 +36,5 @@ yarn-error.log*
 *.sqlite
 *.csv
 
+# DB credentials
+.env
