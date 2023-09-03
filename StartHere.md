@@ -40,7 +40,7 @@ VALUES ('demo2', 5, TO_DATE('1/2/2023', 'MM/DD/YYYY'))
   ``` quasar dev ```
   - website should launch after command
 ### Alternative: Start both with one command
-- First try it with the two terminal windows and two commands, then try this when you get tired of that.
+- First try it with the two terminal windows and two commands, then try this when you get tired of that. Run from /dbProject/server  
 ``` npm run dev ```
 ## Check out the website
 If you click the button on the home page, records stored in the oracle db are displayed.
