@@ -30,8 +30,8 @@ app.use(function (req, res, next) {
 // connect to DB config
 const oracledb = require('oracledb');
 let connectionConfig = {
-  user: "dbUser",
-  password: "dbPassword",
+  user: dbUser,
+  password: dbPassword,
   connectString: "oracle.cise.ufl.edu:1521/orcl"  // Typically in 'hostname:port/serviceName' format
 };
 
