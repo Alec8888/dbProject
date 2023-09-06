@@ -27,8 +27,11 @@ https://nodejs.org/en/download/current
 here's what I inserted in my example:
 INSERT INTO DEMOTABLE (COLUMN1,COLUMN2,COLUMN3) 
 VALUES ('demo2', 5, TO_DATE('1/2/2023', 'MM/DD/YYYY'))
-- In our projec find ./server/.env and enter your user and pwd for UF oracal db
-  - the .env file is not tracked by git so your credentials will not be shared
+- In our project create the file ./server/.env and enter your user and pwd for UF oracal db. The format of the .env file contents is shown below.
+  - the .env file is not tracked by git so your credentials will not be shared  
+
+```DB_USER=oracleUser```  
+```DB_PASSWORD=oraclePassword```
 ## Start App
 ### Server
 - run server.js from server directory  
