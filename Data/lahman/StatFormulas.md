@@ -9,7 +9,7 @@ $OBP = \frac{H + BB + HBP}{AB + BB + HBP + SF}$
 - where $H$ is the number of hits, $BB$ is the number of bases on balls (walks), $HBP$ is the number of times hit by pitch, $AB$ is the number of at bats, and $SF$ is the number of sacrifice flies.
 - How often a player gets on base.
 ### Slugging Percentage
-$SLG = \frac{1B + 2B*2 + 3B*3 + HR*4}{AB}$
+$`SLG = \frac{1B + 2B*2 + 3B*3 + HR*4}{AB}`$
 - where $1B$ is the number of singles, $2B$ is the number of doubles, $3B$ is the number of triples, $HR$ is the number of home runs, and $AB$ is the number of at bats.
 - How often a player gets extra bases when he is at bat.## Calculations
 ### Batting Average
