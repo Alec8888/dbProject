@@ -1,4 +1,4 @@
-# CIS4301 - Information and Database Systems 1 Group Project
+# Contributer Guide
 
 
 ### Contributors
@@ -7,5 +7,12 @@
 - Quan Nguyen
 - Alec Patterson
 
-### Overview 
-Additional details will be added when the project is determined.
+### What this app does
+...
+
+
+### Front End
+...
+
+### Back End
+...

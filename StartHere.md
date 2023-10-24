@@ -52,3 +52,6 @@ If you click the button on the home page, records stored in the oracle db are di
 - Make sure environment variables are set correctly
 - Are both the server and client running? Two terminal windows should be open.
 
+## How does this work?
+1. Start by reading the code in the file /client/src/pages/quertOne.vue. This is the page that is displayed when you click the button on the home page. The code in this file calls the server and the server calls the oracle db. The data is returned to the client and displayed on the page.
+2. Next read the code in /server/server.js. This is the file that starts the server and defines the routes. The route for the query is defined in this file. Also, the connection to the oracle db is defined in this file. The connection is made using the credentials in the .env file. The connection is made using the oracledb module. The query is executed using the connection and the results are returned to the client. 
