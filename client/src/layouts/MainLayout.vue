@@ -66,7 +66,7 @@ const linksList = [
     title: 'Query 2',
     caption: 'caption 2',
     icon: 'code',
-    link: '#/'
+    link: '#/queryTwo'
   },
   {
     title: 'Query 3',

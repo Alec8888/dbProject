@@ -1,12 +1,19 @@
 
 
-const routes = [
+//const routes = [
+
+export default [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
+
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: 'queryOne', component: () => import('pages/QueryOne.vue') }
+      { path: '',
+       component: () => import('pages/indexPage.vue') },
+      { path: 'queryOne',
+       component: () => import('pages/queryOne.vue') },
+       { path: 'queryTwo',
+       component: () => import('pages/queryTwo.vue') }
     ]
   },
 
@@ -18,4 +25,6 @@ const routes = [
   }
 ]
 
-export default routes
+//]
+
+//export default routes
