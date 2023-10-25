@@ -4,11 +4,12 @@
     <h2>Determine the influence over time that team salary has had on the number of wins.</h2>
     <p>The user selects one or many teams and a range of seasons. The salaries of the selected teams are calculated from the players’ and managers' salaries. The spending per win is calculated for each team. The average spending per win for all teams is also calculated, which serves as a reference point. Each year's spending amounts are adjusted for inflation as of the end of 2022. </p>
 
-    <div class="q-pa-md">
-      <q-badge color="secondary" class="q-mb-lg">
+<!-- This bages breaks the range selector -->
+    <!-- <q-badge color="secondary" class="q-mb-lg">
         Years: {{ 1950 }} to {{ 2022 }} (in 10 year intervals)
-      </q-badge>
+    </q-badge> -->
 
+    <div class="q-pa-md">
       <q-range
         v-model="Years"
         :min="1950"
@@ -21,7 +22,7 @@
 
     <div class="q-pa-md" style="max-width: 300px">
       <div class="q-gutter-md">
-        <q-select v-model="model" :options="options" label="Standard" /> 
+        <q-select v-model="model" :options="options" label="Select a Team" /> 
       </div>
     </div>
 
@@ -53,7 +54,7 @@ export default {
       model: ref(null),
       // can we make this list a variable that is populated from the database based on the Year range?
       options: [
-        'team1', 'team2', 'team3', 'team4'
+        'Rays', 'Yankees', 'RedSocks', 'Marlins', 'Mets', 'Phillies', 'Braves', 'Nationals', 'Orioles', 'BlueJays', 'Twins', 'Indians', 'WhiteSox', 'Tigers', 'Royals', 'Astros', 'Rangers', 'Angels', 'Athletics', 'Mariners', 'Giants', 'Dodgers', 'Padres', 'Rockies', 'Diamondbacks', 'Cubs', 'Cardinals', 'Brewers', 'Pirates', 'Reds'
       ]
     }
   }
