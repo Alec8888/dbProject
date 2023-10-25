@@ -15,7 +15,7 @@
           DB Project
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Fall 2023 - CIS4301 - Group 15</div>
       </q-toolbar>
     </q-header>
 

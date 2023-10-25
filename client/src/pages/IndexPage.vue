@@ -22,9 +22,8 @@
     </q-list>
 
     <div class="q-pa-md q-gutter-sm">
-      <q-btn color="white" text-color="black" @click="clickMe">
-        ClickMe
-        <q-icon name="code"></q-icon>
+      <q-btn color="green" text-color="white" @click="clickMe">
+        Start Here
       </q-btn>
     </div>
 
