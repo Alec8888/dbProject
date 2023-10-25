@@ -3,7 +3,7 @@
     <h1>Runs-to-Outs by Salary Range</h1>
     <h2>Calculate the influence over time of player salary on offensive performance.</h2>
     <p>Offensive player performance can be measured by the ratio of runs and runs batted in to outs. Outs will be derived. Categorize players into salary brackets (e.g., low, medium, high) based on annual salary percentile. A high salary could be considered anything greater than or equal to the 75th percentile, medium salaries could be in the middle 50% (25th percentile to 75th percentile) and low salaries could be categorized as below the 25th percentile. Calculate the average of certain performance metrics (e.g., home runs hit, batting average, strikeouts) for all players within each salary bracket for each season and then graph the calculated averages across a range of MLB seasons (2000-2020).</p>
-    
+
     <!--this list is for the demo sql query-->
      <q-list bordered separator>
       <q-item v-for="item in dataFromOracle" :key="item.id">
