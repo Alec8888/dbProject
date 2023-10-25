@@ -1,6 +1,8 @@
 <template>
   <q-page padding>
-    <!-- content -->
+    <h1>FeedBack</h1>
+    <h2></h2>
+    <p>Please complete the form below.</p>
   </q-page>
 </template>
 

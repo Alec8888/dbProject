@@ -1,6 +1,8 @@
 <template>
   <q-page padding>
-    <!-- content -->
+    <h1>Foreign-born MLB player</h1>
+    <h2>insert here</h2>
+    <p>insert here</p>
   </q-page>
 </template>
 

@@ -8,12 +8,14 @@ export default [
     component: () => import('layouts/MainLayout.vue'),
 
     children: [
-      { path: '',
-       component: () => import('pages/indexPage.vue') },
-      { path: 'queryOne',
-       component: () => import('pages/queryOne.vue') },
-       { path: 'queryTwo',
-       component: () => import('pages/queryTwo.vue') }
+      { path: '', component: () => import('pages/indexPage.vue') },
+      { path: 'queryOne', component: () => import('pages/queryOne.vue') },
+      { path: 'queryTwo', component: () => import('pages/queryTwo.vue') },
+      { path: 'queryThree', component: () => import('pages/queryThree.vue') },
+      { path: 'queryFour', component: () => import('pages/queryFour.vue') },
+      { path: 'queryFive', component: () => import('pages/queryFive.vue') },
+      { path: 'feedback', component: () => import('pages/submitFeedback.vue') },
+      { path: 'thanks', component: () => import('pages/thankYou.vue') },
     ]
   },
 

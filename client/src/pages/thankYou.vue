@@ -1,6 +1,8 @@
 <template>
   <q-page padding>
-    <!-- content -->
+    <h1>Thanks!</h1>
+    <h2></h2>
+    <p>Thank you for submittined your feed back.</p>
   </q-page>
 </template>
 

@@ -52,39 +52,39 @@ import EssentialLink from 'components/EssentialLink.vue'
 const linksList = [
   {
     title: 'Home',
-    caption: 'Sign in or register',
+    caption: 'Baseball Statistics Visualizations',
     icon: 'code',
     link: '#/'
   },
   {
     title: 'Query 1',
-    caption: 'caption 1',
+    caption: 'Runs-to-Outs by Salary range',
     icon: 'school',
     link: '#/queryOne'
   },
   {
     title: 'Query 2',
-    caption: 'caption 2',
+    caption: 'Team Spending Per Win',
     icon: 'code',
     link: '#/queryTwo'
   },
   {
     title: 'Query 3',
-    caption: 'caption 3',
+    caption: 'Foreign-born MLB player distributions',
     icon: 'chat',
-    link: '#/'
+    link: '#/queryThree'
   },
   {
     title: 'Query 4',
-    caption: 'caption 4',
+    caption: 'Player Height & Performance',
     icon: 'record_voice_over',
-    link: '#/'
+    link: '#/queryFour'
   },
   {
     title: 'Query 5',
-    caption: 'caption 5',
+    caption: 'Home Runs & Post Season',
     icon: 'rss_feed',
-    link: '#/'
+    link: '#/queryFive'
   }
 ]
 
