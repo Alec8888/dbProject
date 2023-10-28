@@ -1,39 +1,48 @@
 <template>
   <q-page padding>
-    <h1>Runs-to-Outs by Salary Range</h1>
-    <h2>Calculate the influence over time of player salary on offensive performance.</h2>
-    <p>Offensive player performance can be measured by the ratio of runs and runs batted in to outs. Outs will be derived. Categorize players into salary brackets (e.g., low, medium, high) based on annual salary percentile. A high salary could be considered anything greater than or equal to the 75th percentile, medium salaries could be in the middle 50% (25th percentile to 75th percentile) and low salaries could be categorized as below the 25th percentile. Calculate the average of certain performance metrics (e.g., home runs hit, batting average, strikeouts) for all players within each salary bracket for each season and then graph the calculated averages across a range of MLB seasons (2000-2020).</p>
 
-    <!-- <div class="q-pa-md">
-      <q-badge color="secondary" class="q-mb-lg">
-        Model: {{ label.min }} to {{ label.max }} (-20 to 20, step 4)
-      </q-badge>
+    <div class="text-h2 q-pa-md">
+      Runs-to-Outs by Salary Range
+    </div>
 
-      <q-range
-        v-model="label"
-        :min="-20"
-        :max="20"
-        :step="4"
-        label-always
-        color="brown"
-      />
-    </div> -->
+    <div class="text-h4 q-pa-md">
+      Exploring the Impact of Salaries on Performance
+    </div>
 
-    
+    <div class="q-pa-md text-body1">
+      This section delves into how a player's salary can influence their offensive performance over time. It’s critical to examine the efficiency of players in terms of their ability to score and bring in runs, in relation to the number of outs. This analytical approach takes into account different salary ranges, categorizing them as high, medium, and low based on specific percentiles.
+    </div>
 
-    <!--this list is for the demo sql query-->
-     <q-list bordered separator>
-      <q-item v-for="item in dataFromOracle" :key="item.id">
-        <q-item-section>{{ item[0] }}</q-item-section>
-        <q-item-section>{{ item[1] }}</q-item-section>
-        <q-item-section>{{ item[2] }}</q-item-section>
-      </q-item>
-    </q-list>
+    <div class="text-h4 q-pa-md">
+      Methodology:
+    </div>
 
-    <div class="q-pa-md q-gutter-sm">
-      <q-btn color="white" text-color="black" @click="runQuery1">
+    <div class="q-pa-md text-body1">
+      To conduct this analysis, we categorize players into different salary brackets. Players earning at or above the 75th percentile are considered in the high salary range. Those in the middle 50% (25th to 75th percentile) fall into the medium category, while those below the 25th percentile are deemed to be in the low salary bracket.
+    </div>
+
+    <div class="text-h4 q-pa-md">
+      Analysis and Visualization:
+    </div>
+
+    <div class="q-pa-md text-body1">
+      The study calculates the average of certain performance metrics (such as home runs, batting average, and strikeouts) for all players within each salary bracket. These averages are then plotted over multiple MLB seasons (spanning from 2000 to 2020) to visualize trends and derive insights on the correlation between salary and performance.
+    </div>
+
+    <div class="q-pa-md">
+      <!--this list is for the demo sql query-->
+      <q-list bordered separator>
+          <q-item v-for="item in dataFromOracle" :key="item.id">
+            <q-item-section>{{ item[0] }}</q-item-section>
+            <q-item-section>{{ item[1] }}</q-item-section>
+            <q-item-section>{{ item[2] }}</q-item-section>
+          </q-item>
+        </q-list>
+    </div>
+
+    <div class="q-pa-md">
+      <q-btn color="positive" text-color="white" @click="runQuery1">
         Run Visualization
-        <q-icon name="code"></q-icon>
       </q-btn>
     </div>
 

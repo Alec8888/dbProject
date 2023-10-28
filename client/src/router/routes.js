@@ -1,7 +1,3 @@
-
-
-//const routes = [
-
 export default [
   {
     path: '/',
