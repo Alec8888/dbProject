@@ -36,7 +36,7 @@ let connectionConfig = {
 };
 
 // Connection to Oracle DB
-async function run() {
+async function run(name_submitted) {
   let connection;
   let result;
 
@@ -46,7 +46,8 @@ async function run() {
     console.log('Successfully connected to Oracle!');
 
     // test connection
-    result = await connection.execute(`SELECT * FROM DEMOTABLE`);
+    // result = await connection.execute("SELECT * FROM DEMOTABLE")
+    result = await connection.execute("SELECT name, population FROM CITY WHERE name=:name", {name: name_submitted});
     console.log(result.rows);
 
   } catch (err) {
@@ -71,7 +72,7 @@ const server = app.listen(3000, () => {
 });
 
 app.get('/api', async(req, res) => {
-  const rows = await run();
+  const rows = await run(req.query.name_from_client);
   res.send(rows);
 });
 

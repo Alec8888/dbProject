@@ -12,7 +12,7 @@
     <div class="q-pa-md text-body1">
       The user selects one or many teams and a range of seasons. The salaries of the selected teams are calculated from the players’ and managers' salaries. The spending per win is calculated for each team. The average spending per win for all teams is also calculated, which serves as a reference point. Each year's spending amounts are adjusted for inflation as of the end of 2022.
     </div>
-<!-- This bages breaks the range selector -->
+
     <q-badge color="secondary" class="q-mb-lg">
         Years: {{ year_range.min }} to {{ year_range.max }}
     </q-badge>

@@ -57,14 +57,15 @@ export default defineComponent({
   name: 'queryOne',
   data () {
     return {
-      dataFromOracle: []
-
+      dataFromOracle: [],
+      cityName: 'Tampa',
+      country: 'USA'
     }
   }
   ,
   methods: {
     async runQuery1 () {
-      let response = await fetch('http://localhost:3000/api');
+      let response = await fetch(`http://localhost:3000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
       let data = await response.json();
       this.dataFromOracle = data;
       console.log(data);
