@@ -1,15 +1,81 @@
 <template>
   <q-page padding>
-    <h1>Player Height & Performance</h1>
-    <h2>Over the years, how has a baseball player's height influenced their performance in terms of on-base percentage, range factor, and on-base percentage-against? </h2>
-    <p>On-base percentage represents how often a player gets on base. Higher On-base percentage is desired. Range factor represents how many plays a players makes per game. A higher range factor is desired. On-base percentage against is how often a pitcher allows a baserunner when he is pitching. A lower on-base percentage against is desired.  </p>
+    <div class="q-gutter-md">
+
+      <div class="text-h2">
+        Title
+      </div>
+      <div class="text-h4">
+          Sub title
+      </div>
+      <div class="text-body1">
+          description body...
+      </div>
+      <div class="text-h5">
+          Methodology:
+      </div>
+      <div class="text-body1">
+        To conduct this analysis...
+      </div>
+      <div class="text-h5">
+          Analysis and Visualization:
+      </div>
+      <div class="text-body1">
+        Such and such is calculated...
+      </div>
+
+      <div class="text-h4">
+        Input here
+      </div>
+
+      <q-btn 
+          class="glossy"
+          :loading="progress" 
+          color="primary" 
+          @click="runQuery4"
+        >
+          Run Visualization
+          <template v-slot:loading>
+            <q-spinner-gears class="on-left" />
+            Calculating...
+          </template>
+        </q-btn>
+
+        <div class="text-h4">
+          Chart Js here
+        </div>
   
-    <q-btn class="glossy" color="primary" label="Next Visualization" to="queryFive"/>
+      <q-btn class="glossy" color="primary" label="Next Visualization" to="queryFour"/>
+
+    </div>
   </q-page>
 </template>
 
 <script>
 export default {
-  // name: 'PageName',
+  name: 'queryFour',
+  data () {
+    return {
+      dataFromOracle: [],
+      cityName: 'Tampa',
+      country: 'USA',
+      progress: false
+    }
+  },
+  methods: {
+    async runQuery4 () {
+      this.progress = true;
+      // simulate a delay
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      let response = await fetch(`http://localhost:3000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
+      let data = await response.json();
+      this.dataFromOracle = data;
+
+      this.progress = false;
+
+      console.log(data);
+    }
+  }
 }
 </script>

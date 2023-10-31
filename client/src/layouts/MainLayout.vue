@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          DB Project
+          {{ $route.meta.title }}
         </q-toolbar-title>
 
         <div>Fall 2023 - CIS4301 - Group 15</div>
@@ -28,7 +28,7 @@
         <q-item-label
           header
         >
-          Essential Links
+          Navigation
         </q-item-label>
 
         <EssentialLink

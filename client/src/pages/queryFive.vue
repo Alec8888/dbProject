@@ -1,15 +1,81 @@
 <template>
   <q-page padding>
-    <h1>Home Runs & Post Season</h1>
-    <h2>Determine the influence over time of home runs on the likelihood of a player appearing in the post season. </h2>
-    <p>It is well known that players and teams have been averaging more home runs over time. However, it will be interesting to visualize how home runs in the regular season have translated to postseason appearances over the years. </p>
+    <div class="q-gutter-md">
+
+      <div class="text-h2">
+        Title
+      </div>
+      <div class="text-h4">
+          Sub title
+      </div>
+      <div class="text-body1">
+          description body...
+      </div>
+      <div class="text-h5">
+          Methodology:
+      </div>
+      <div class="text-body1">
+        To conduct this analysis...
+      </div>
+      <div class="text-h5">
+          Analysis and Visualization:
+      </div>
+      <div class="text-body1">
+        Such and such is calculated...
+      </div>
+
+      <div class="text-h4">
+        Input here
+      </div>
+
+      <q-btn 
+          class="glossy"
+          :loading="progress" 
+          color="primary" 
+          @click="runQuery5"
+        >
+          Run Visualization
+          <template v-slot:loading>
+            <q-spinner-gears class="on-left" />
+            Calculating...
+          </template>
+        </q-btn>
+
+        <div class="text-h4">
+          Chart Js here
+        </div>
   
-    <q-btn class="glossy" color="primary" label="Leave Feedback" to="feedback"/>
+      <q-btn class="glossy" color="primary" label="Next Visualization" to="queryFour"/>
+
+    </div>
   </q-page>
 </template>
 
 <script>
 export default {
-  // name: 'PageName',
+  name: 'queryFive',
+  data () {
+    return {
+      dataFromOracle: [],
+      cityName: 'Tampa',
+      country: 'USA',
+      progress: false
+    }
+  },
+  methods: {
+    async runQuery5 () {
+      this.progress = true;
+      // simulate a delay
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      let response = await fetch(`http://localhost:3000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
+      let data = await response.json();
+      this.dataFromOracle = data;
+
+      this.progress = false;
+
+      console.log(data);
+    }
+  }
 }
 </script>
