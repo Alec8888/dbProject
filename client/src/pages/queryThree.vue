@@ -6,6 +6,8 @@
 
     <q-btn color="primary" label="Run Visualization" @click="itWasClicked"/>
 
+    <q-btn class="glossy" color="primary" label="Next Visualization" to="queryFour"/>
+
   </q-page>
 </template>
 

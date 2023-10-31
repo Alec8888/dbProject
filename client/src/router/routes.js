@@ -4,7 +4,7 @@ export default [
     component: () => import('layouts/MainLayout.vue'),
 
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: '', component: () => import('pages/homePage.vue') },
       { path: 'queryOne', component: () => import('pages/queryOne.vue') },
       { path: 'queryTwo', component: () => import('pages/queryTwo.vue') },
       { path: 'queryThree', component: () => import('pages/queryThree.vue') },
