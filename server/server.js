@@ -5,7 +5,6 @@ require('dotenv').config();
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 
-
 // EXPRESS 
 const express = require('express');
 const app = express();
@@ -75,4 +74,3 @@ app.get('/api', async(req, res) => {
   const rows = await run(req.query.name_from_client);
   res.send(rows);
 });
-

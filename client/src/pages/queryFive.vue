@@ -45,7 +45,7 @@
           Chart Js here
         </div>
   
-      <q-btn class="glossy" color="primary" label="Next Visualization" to="queryFour"/>
+      <q-btn class="glossy" color="primary" label="Give Feedback" to="feedback"/>
 
     </div>
   </q-page>
