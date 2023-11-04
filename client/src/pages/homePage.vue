@@ -1,20 +1,21 @@
 <template>
   <!-- class="bg-image" -->
-  <q-page padding class="bg-image">
+  <q-page padding>
     <q-btn class="glossy q-my-sm" color="primary" label="Start Here" to="queryOne"/>
 
     <div class="row q-gutter-md">
 
       <q-card class="queryCards">
+        
         <q-img fit="cover" src="~/assets/q1-cardImage.png" class="query-img-card">
           <div class="absolute-bottom text-h6">
             {{ q1_title }}
           </div>
         </q-img>
-
-        <q-card-section>
-          {{ q1_description }}
-        </q-card-section>
+        
+          <q-card-section>
+            {{ q1_description }}
+          </q-card-section>
       </q-card>
 
       <q-card fit="contain" class="queryCards" >
@@ -66,7 +67,7 @@
       </q-card>
     </div>
 
-
+    <q-btn class="glossy q-my-sm" color="primary" label="Start Here" to="queryOne"/>
   </q-page>
 </template>
 
@@ -97,10 +98,6 @@ export default defineComponent({
 </script>
 
 <style >
-  .bg-image {
-    background-image: url('C:/dev/dbProject/client/src/assets/bg4.png');
-    background-size: fit;
-  }
   .text.color {
     color: black;
   }
@@ -108,9 +105,8 @@ export default defineComponent({
   {
     width: 100%;
     max-width: 350px;
+    clickable: true;
     
   }
-  /* .query-img-card {
-    height: 200px;
-  } */
+
 </style>

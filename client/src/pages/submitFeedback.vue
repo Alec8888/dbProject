@@ -14,63 +14,78 @@ export default {
 
 
 <template>
-  <div class="q-pa-md" style="max-width: 800px">
+  <q-page padding>
 
-    <q-form
-      action="http://localhost:8000/#/api"
-      method="post"
-      @submit="onSubmit"
-      @reset="onReset"
-      class="q-gutter-md"
-    >
-      <q-input
-        filled
-        v-model="name"
-        label="Your name *"
-        color="secondary"
-        lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please type something']"
-      />
+    <div style="max-width: 800px;">
+      <q-card>
+        <q-card-section>
+          <div class="text-h5">
+            Feedback Form
+          </div>
+          <div class="text-body1">
+            Please complete the form below.
+          </div>
+        </q-card-section>
+        <q-card-section>
 
-      <q-input
-        filled
-        type="email"
-        v-model="email"
-        label="Email address*"
-        lazy-rules
-        color="secondary"
-        :rules="[
-          val => val && val.length > 0 || 'Please type something',
-          val => /^.+@.+\..+$/.test(val) || 'Please type a valid email'
-        ]"
-      />
-
-      <div class="text-h6">
-        Select all visualizations for which you are leaving feedback:
-      </div>
-
-      <q-option-group
-        :options="queries"
-        type="checkbox"
-        v-model="group"
-      />
-
-      <q-input
-        v-model="feedbackBody"
-        label="Write feedback here..."
-        filled
-        autogrow
-      />
-
-
-      <div>
-        <q-btn label="Submit" type="submit" color="primary"/>
-        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-      </div>
-    </q-form>
-
-
-  </div>
+          <q-form
+            action="http://localhost:8000/#/api"
+            method="post"
+            @submit="onSubmit"
+            @reset="onReset"
+            class="q-gutter-md"
+          >
+            <q-input
+              filled
+              v-model="name"
+              label="Your name *"
+              color="secondary"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Please type something']"
+            />
+      
+            <q-input
+              filled
+              type="email"
+              v-model="email"
+              label="Email address*"
+              lazy-rules
+              color="secondary"
+              :rules="[
+                val => val && val.length > 0 || 'Please type something',
+                val => /^.+@.+\..+$/.test(val) || 'Please type a valid email'
+              ]"
+            />
+      
+            <div class="text-h6">
+              Select all visualizations for which you are leaving feedback:
+            </div>
+      
+            <q-option-group
+              :options="queries"
+              type="checkbox"
+              v-model="group"
+            />
+      
+            <q-input
+              v-model="feedbackBody"
+              label="Write feedback here..."
+              filled
+              autogrow
+            />
+      
+      
+            <div>
+              <q-btn label="Submit" type="submit" color="primary"/>
+              <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+            </div>
+          </q-form>
+        </q-card-section> 
+      </q-card>
+  
+  
+    </div>
+  </q-page>
 
 </template>
 

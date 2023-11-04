@@ -39,7 +39,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="bg-image">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -108,3 +108,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<style >
+  .bg-image {
+    background-image: url('C:/dev/dbProject/client/src/assets/bg1.png');
+    background-size: fit;
+  }
+
+</style>

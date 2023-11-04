@@ -1,75 +1,97 @@
 <template>
   <q-page padding>
     <div class="q-gutter-md">
+    
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Exploring the Impact of Salaries on Performance
+          </div>
+          <div class="text-body1">
+            This section delves into how a player's salary can influence their offensive performance over time. It’s critical to examine the efficiency of players in terms of their ability to score and bring in runs, in relation to the number of outs. This analytical approach takes into account different salary ranges, categorizing them as high, medium, and low based on specific percentiles.
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Methodology
+          </div>
+          <div class="text-body1">
+            To conduct this analysis, we categorize players into different salary brackets. Players earning at or above the 75th percentile are considered in the high salary range. Those in the middle 50% (25th to 75th percentile) fall into the medium category, while those below the 25th percentile are deemed to be in the low salary bracket.
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Analysis and Visualization
+          </div>
+          <div class="text-body1">
+            The study calculates the average of certain performance metrics (such as home runs, batting average, and strikeouts) for all players within each salary bracket. These averages are then plotted over multiple MLB seasons (spanning from 2000 to 2020) to visualize trends and derive insights on the correlation between salary and performance.
+          </div>
+        </q-card-section>
+      </q-card>
 
-      <div class="text-h2">
-        Runs-to-Outs by Salary Range
-      </div>
-  
-      <div class="text-h4">
-        Exploring the Impact of Salaries on Performance
-      </div>
-  
-      <div class="text-body1">
-        This section delves into how a player's salary can influence their offensive performance over time. It’s critical to examine the efficiency of players in terms of their ability to score and bring in runs, in relation to the number of outs. This analytical approach takes into account different salary ranges, categorizing them as high, medium, and low based on specific percentiles.
-      </div>
-  
-      <div class="text-h5">
-        Methodology:
-      </div>
-  
-      <div class="text-body1">
-        To conduct this analysis, we categorize players into different salary brackets. Players earning at or above the 75th percentile are considered in the high salary range. Those in the middle 50% (25th to 75th percentile) fall into the medium category, while those below the 25th percentile are deemed to be in the low salary bracket.
-      </div>
-  
-      <div class="text-h5">
-        Analysis and Visualization:
-      </div>
-  
-      <div class="text-body1">
-        The study calculates the average of certain performance metrics (such as home runs, batting average, and strikeouts) for all players within each salary bracket. These averages are then plotted over multiple MLB seasons (spanning from 2000 to 2020) to visualize trends and derive insights on the correlation between salary and performance.
-      </div>
-  
-      <!-- test removing this div -->
-      <div>
-        <!--this list is for the demo sql query-->
-        <q-list bordered separator>
-            <q-item v-for="item in dataFromOracle" :key="item.id">
-              <q-item-section>{{ item[0] }}</q-item-section>
-              <q-item-section>{{ item[1] }}</q-item-section>
-              <q-item-section>{{ item[2] }}</q-item-section>
-            </q-item>
-          </q-list>
-      </div>
-
-      <div class="text-h4">
-        Input here
-      </div>
-
-      <q-btn 
-        class="glossy"
-        :loading="progress" 
-        color="primary" 
-        @click="runQuery1"
-      >
-        Run Visualization
-        <template v-slot:loading>
-          <q-spinner-gears class="on-left" />
-          Calculating...
-        </template>
-      </q-btn>
-
-      <div class="text-h4">
-        Chart Js here
-      </div>
-
-      <q-btn 
-      class="glossy" 
-      color="primary" 
-      label="Next Visualization" 
-      to="queryTwo" 
-      />
-
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Select a range of seasons and click the run visualization button.
+          </div>
+        </q-card-section>
+        <q-card-section>
+            <q-range
+            name="year_range"
+            v-model="year_range"
+            :min="1871"
+            :max="2022"
+            :step="1"
+            label-always
+            color="primary"
+            markers=true
+          />
+        </q-card-section>
+        <q-card-section>
+          <q-btn 
+            class="glossy"
+            :loading="progress" 
+            color="primary" 
+            @click="runQuery1"
+          >
+            Run Visualization
+            <template v-slot:loading>
+              <q-spinner-gears class="on-left" />
+              Calculating...
+            </template>
+          </q-btn>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          Chart Js here
+        </q-card-section>
+        <q-card-section>
+          <div>
+          <!--this list is for the demo sql query-->
+          <q-list bordered separator>
+              <q-item v-for="item in dataFromOracle" :key="item.id">
+                <q-item-section>{{ item[0] }}</q-item-section>
+                <q-item-section>{{ item[1] }}</q-item-section>
+                <q-item-section>{{ item[2] }}</q-item-section>
+              </q-item>
+            </q-list>
+          </div>
+        </q-card-section>
+        <q-card-section>
+          <q-btn
+          class="glossy" 
+          color="primary" 
+          label="Next Visualization" 
+          to="queryTwo" 
+          />
+        </q-card-section>
+      </q-card>
+      
     </div>
 
   </q-page>
@@ -85,7 +107,11 @@ export default {
       dataFromOracle: [],
       cityName: 'Tampa',
       country: 'USA',
-      progress: false
+      progress: false,
+      year_range: {
+        min: 1871,
+        max: 2022
+      }
     }
   },
   methods: {
