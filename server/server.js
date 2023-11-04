@@ -66,11 +66,12 @@ async function run(name_submitted) {
 run();
 
 app.use(express.static("../spa/"));
-const server = app.listen(3000, () => {
-  console.log('server started at localhost:3000');
+const server = app.listen(4000, () => {
+  console.log('server started at localhost:4000');
 });
 
 app.get('/api', async(req, res) => {
   const rows = await run(req.query.name_from_client);
   res.send(rows);
 });
+

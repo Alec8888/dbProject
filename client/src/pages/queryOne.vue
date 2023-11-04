@@ -92,9 +92,9 @@ export default {
     async runQuery1 () {
       this.progress = true;
       // simulate a delay
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      // await new Promise(resolve => setTimeout(resolve, 3000));
 
-      let response = await fetch(`http://localhost:3000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
+      let response = await fetch(`http://localhost:4000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
       let data = await response.json();
       this.dataFromOracle = data;
 
