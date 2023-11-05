@@ -53,37 +53,37 @@ const linksList = [
   {
     title: 'Home',
     caption: 'Baseball Statistics Visualizations',
-    icon: 'code',
+    icon: 'home',
     link: '#/'
   },
   {
     title: 'Query 1',
     caption: 'Runs-to-Outs by Salary range',
-    icon: 'school',
+    icon: 'sports_baseball',
     link: '#/queryOne'
   },
   {
     title: 'Query 2',
     caption: 'Team Spending Per Win',
-    icon: 'code',
+    icon: 'sports_baseball',
     link: '#/queryTwo'
   },
   {
     title: 'Query 3',
     caption: 'Foreign-born MLB player distributions',
-    icon: 'chat',
+    icon: 'sports_baseball',
     link: '#/queryThree'
   },
   {
     title: 'Query 4',
     caption: 'Player Height & Performance',
-    icon: 'record_voice_over',
+    icon: 'sports_baseball',
     link: '#/queryFour'
   },
   {
     title: 'Query 5',
     caption: 'Home Runs & Post Season',
-    icon: 'rss_feed',
+    icon: 'sports_baseball',
     link: '#/queryFive'
   }
 ]

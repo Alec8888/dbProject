@@ -1,24 +1,45 @@
 <template>
+  
   <q-page padding>
     <div class="q-gutter-md">
-      <div class="text-h2">
-        Team Spending Per Win
-      </div>
-  
-      <div class="text-h4">
-        Determine the influence over time that team salary has had on the number of wins.
-      </div>
-  
-      <div class="text-body1">
-        The user selects one or many teams and a range of seasons. The salaries of the selected teams are calculated from the players’ and managers' salaries. The spending per win is calculated for each team. The average spending per win for all teams is also calculated, which serves as a reference point. Each year's spending amounts are adjusted for inflation as of the end of 2022.
-      </div>
-  
-      <q-badge color="secondary" class="q-mb-lg">
-          Years: {{ year_range.min }} to {{ year_range.max }}
-      </q-badge>
-  
-      <q-form>
-          <q-range
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Determine the influence over time that team salary has had on the number of wins.
+          </div>
+          <div class="text-body1">
+            The user selects one or many teams and a range of seasons. The salaries of the selected teams are calculated from the players’ and managers' salaries. The spending per win is calculated for each team. The average spending per win for all teams is also calculated, which serves as a reference point. Each year's spending amounts are adjusted for inflation as of the end of 2022.
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Methodology
+          </div>
+          <div class="text-body1">
+            text body...
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Analysis and Visualization
+          </div>
+          <div class="text-body1">
+            Text body..  
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Select a range of seasons and click the run visualization button.
+          </div>
+        </q-card-section>
+        <q-card-section>
+            <q-range
             name="year_range"
             v-model="year_range"
             :min="1871"
@@ -28,30 +49,48 @@
             color="primary"
             markers=true
           />
-
-        <q-btn 
-          class="glossy"
-          :loading="progress" 
+        </q-card-section>
+        <q-card-section>
+          <q-btn 
+            class="glossy"
+            :loading="progress" 
+            color="primary" 
+            @click="runQuery1"
+          >
+            Run Visualization
+            <template v-slot:loading>
+              <q-spinner-gears class="on-left" />
+              Calculating...
+            </template>
+          </q-btn>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          Chart Js here
+        </q-card-section>
+        <q-card-section>
+          <div>
+          <!--this list is for the demo sql query-->
+          <q-list bordered separator>
+              <q-item v-for="item in dataFromOracle" :key="item.id">
+                <q-item-section>{{ item[0] }}</q-item-section>
+                <q-item-section>{{ item[1] }}</q-item-section>
+                <q-item-section>{{ item[2] }}</q-item-section>
+              </q-item>
+            </q-list>
+          </div>
+        </q-card-section>
+        <q-card-section>
+          <q-btn
+          class="glossy" 
           color="primary" 
-          @click="runQuery2"
-        >
-          Run Visualization
-          <template v-slot:loading>
-            <q-spinner-gears class="on-left" />
-            Calculating...
-          </template>
-        </q-btn>
-
-      </q-form>
-
-      <div class="text-h4">
-        Chart Js here
-      </div>
-  
-      <q-btn class="glossy" color="primary" label="Next Visualization" to="queryThree"/>
-
+          label="Next Visualization" 
+          to="queryTwo" 
+          />
+        </q-card-section>
+      </q-card>
     </div>
-
   </q-page>
 </template>
 
