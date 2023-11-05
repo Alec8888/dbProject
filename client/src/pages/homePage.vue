@@ -1,7 +1,7 @@
 <template>
   <!-- class="bg-image" -->
   <q-page padding>
-    <q-btn class="glossy q-mb-sm" color="primary" label="Start Here" to="queryOne"/>
+    <!-- <q-btn class="glossy q-mb-sm" color="primary" label="Start Here" to="queryOne"/> -->
 
     <div class="row q-gutter-md">
 
@@ -57,7 +57,7 @@
       </q-card>
 
       <q-card class="queryCards">
-        <q-img src="~/assets/q4-cardImage.png" class="query-img-card">
+        <q-img src="~/assets/q4-cardImage1.png" class="query-img-card" fit="cover">
           <div class="absolute-full transparent">
             <q-list class="absolute-full transparent">
               <q-item to="queryFour" class="absolute-full transparent"></q-item>

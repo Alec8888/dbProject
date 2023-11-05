@@ -55,7 +55,7 @@
             class="glossy"
             :loading="progress" 
             color="primary" 
-            @click="runQuery1"
+            @click="runQuery2"
           >
             Run Visualization
             <template v-slot:loading>
@@ -63,13 +63,20 @@
               Calculating...
             </template>
           </q-btn>
+          <q-btn 
+            class="glossy q-ml-sm"
+            :loading="progress" 
+            color="primary" 
+            @click="reset"
+            label="Reset"
+          />
         </q-card-section>
       </q-card>
       <q-card>
-        <q-card-section>
-          Chart Js here
-        </q-card-section>
-        <q-card-section>
+        
+          <q-img v-if="showPlaceholder" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
+        
+        <q-card-section v-if="showVisualization">
           <div>
           <!--this list is for the demo sql query-->
           <q-list bordered separator>
@@ -81,12 +88,26 @@
             </q-list>
           </div>
         </q-card-section>
-        <q-card-section>
+        <q-card-section class="q-gutter-sm">
           <q-btn
           class="glossy" 
           color="primary" 
-          label="Next Visualization" 
-          to="queryTwo" 
+          icon="home"
+          to="/" 
+          />
+          <q-btn
+          class="glossy" 
+          color="primary"
+          label="Prev"
+          icon="navigate_before"
+          to="/queryOne" 
+          />
+          <q-btn
+          class="glossy" 
+          color="primary"
+          label="Next"
+          icon-right="navigate_next"
+          to="queryThree" 
           />
         </q-card-section>
       </q-card>
@@ -95,10 +116,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-
 export default {
-  name: 'queryTwo',
   data () {
     return {
       dataFromOracle: [],
@@ -108,22 +126,31 @@ export default {
       year_range: {
         min: 1871,
         max: 2022
-      }
+      },
+      showPlaceholder: true,
+      showVisualization: false
     }
   },
   methods: {
     async runQuery2 () {
       this.progress = true;
-      // simulate a delay
-      await new Promise(resolve => setTimeout(resolve, 3000));
-
-      let response = await fetch(`http://localhost:3000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
+      
+      let response = await fetch(`http://localhost:4000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
       let data = await response.json();
       this.dataFromOracle = data;
+      console.log(data);
 
       this.progress = false;
+      this.showPlaceholder = false;
+      this.showVisualization = true;
 
-      console.log(data);
+    },
+    reset () {
+      this.dataFromOracle = [];
+      this.showPlaceholder = true;
+      this.showVisualization = false;
+      this.year_range.min = 1871;
+      this.year_range.max = 2022;
     }
   }
 }

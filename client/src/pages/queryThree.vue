@@ -1,80 +1,156 @@
 <template>
+  
   <q-page padding>
     <div class="q-gutter-md">
-
-      <div class="text-h2">
-        Title
-      </div>
-      <div class="text-h4">
-          Sub title
-      </div>
-      <div class="text-body1">
-          description body...
-      </div>
-      <div class="text-h5">
-          Methodology:
-      </div>
-      <div class="text-body1">
-        To conduct this analysis...
-      </div>
-      <div class="text-h5">
-          Analysis and Visualization:
-      </div>
-      <div class="text-body1">
-        Such and such is calculated...
-      </div>
-
-      <div class="text-h4">
-        Input here
-      </div>
-
-      <q-btn 
-          class="glossy"
-          :loading="progress" 
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Sub title
+          </div>
+          <div class="text-body1">
+            text body...  
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Methodology
+          </div>
+          <div class="text-body1">
+            text body...
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Analysis and Visualization
+          </div>
+          <div class="text-body1">
+            Text body..  
+          </div>
+        </q-card-section>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">
+            Select a range of seasons and click the run visualization button.
+          </div>
+        </q-card-section>
+        <q-card-section>
+            <q-range
+            name="year_range"
+            v-model="year_range"
+            :min="1871"
+            :max="2022"
+            :step="1"
+            label-always
+            color="primary"
+            markers=true
+          />
+        </q-card-section>
+        <q-card-section>
+          <q-btn 
+            class="glossy"
+            :loading="progress" 
+            color="primary" 
+            @click="runQuery3"
+          >
+            Run Visualization
+            <template v-slot:loading>
+              <q-spinner-gears class="on-left" />
+              Calculating...
+            </template>
+          </q-btn>
+          <q-btn 
+            class="glossy q-ml-sm"
+            :loading="progress" 
+            color="primary" 
+            @click="reset"
+            label="Reset"
+          />
+        </q-card-section>
+      </q-card>
+      <q-card>
+        
+          <q-img v-if="showPlaceholder" fit="fill" src="~/assets/q3-cardImage.png" class="query-img-card"/>
+        
+        <q-card-section v-if="showVisualization">
+          <div>
+          <!--this list is for the demo sql query-->
+          <q-list bordered separator>
+              <q-item v-for="item in dataFromOracle" :key="item.id">
+                <q-item-section>{{ item[0] }}</q-item-section>
+                <q-item-section>{{ item[1] }}</q-item-section>
+                <q-item-section>{{ item[2] }}</q-item-section>
+              </q-item>
+            </q-list>
+          </div>
+        </q-card-section>
+        <q-card-section class="q-gutter-sm">
+          <q-btn
+          class="glossy" 
           color="primary" 
-          @click="runQuery3"
-        >
-          Run Visualization
-          <template v-slot:loading>
-            <q-spinner-gears class="on-left" />
-            Calculating...
-          </template>
-        </q-btn>
-
-        <div class="text-h4">
-          Chart Js here
-        </div>
-  
-      <q-btn class="glossy" color="primary" label="Next Visualization" to="queryFour"/>
-
+          icon="home"
+          to="/" 
+          />
+          <q-btn
+          class="glossy" 
+          color="primary"
+          label="Prev"
+          icon="navigate_before"
+          to="/queryTwo" 
+          />
+          <q-btn
+          class="glossy" 
+          color="primary"
+          label="Next"
+          icon-right="navigate_next"
+          to="queryFour" 
+          />
+        </q-card-section>
+      </q-card>
     </div>
   </q-page>
 </template>
 
 <script>
 export default {
-  name: 'queryThree',
   data () {
     return {
       dataFromOracle: [],
       cityName: 'Tampa',
       country: 'USA',
-      progress: false
+      progress: false,
+      year_range: {
+        min: 1871,
+        max: 2022
+      },
+      showPlaceholder: true,
+      showVisualization: false
     }
   },
   methods: {
     async runQuery3 () {
       this.progress = true;
-      // simulate a delay
-      await new Promise(resolve => setTimeout(resolve, 3000));
-
-      let response = await fetch(`http://localhost:3000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
+      
+      let response = await fetch(`http://localhost:4000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
       let data = await response.json();
       this.dataFromOracle = data;
+      console.log(data);
 
       this.progress = false;
+      this.showPlaceholder = false;
+      this.showVisualization = true;
 
-      console.log(data);
+    },
+    reset () {
+      this.dataFromOracle = [];
+      this.showPlaceholder = true;
+      this.showVisualization = false;
+      this.year_range.min = 1871;
+      this.year_range.max = 2022;
     }
   }
 }

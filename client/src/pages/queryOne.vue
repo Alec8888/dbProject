@@ -55,20 +55,28 @@
             :loading="progress" 
             color="primary" 
             @click="runQuery1"
+            label="Run Visualization"
           >
-            Run Visualization
             <template v-slot:loading>
               <q-spinner-gears class="on-left" />
               Calculating...
             </template>
           </q-btn>
+          <q-btn 
+            class="glossy q-ml-sm"
+            :loading="progress" 
+            color="primary" 
+            @click="reset"
+            label="Reset"
+          />
+          
         </q-card-section>
       </q-card>
       <q-card>
-        <q-card-section>
-          Chart Js here
-        </q-card-section>
-        <q-card-section>
+        
+        <q-img v-if="showPlaceholder" fit="fill" src="~/assets/q1-cardImage.png" class="query-img-card"/>
+      
+        <q-card-section v-if="showVisualization">
           <div>
           <!--this list is for the demo sql query-->
           <q-list bordered separator>
@@ -80,11 +88,18 @@
             </q-list>
           </div>
         </q-card-section>
-        <q-card-section>
+        <q-card-section class="q-gutter-sm">
           <q-btn
           class="glossy" 
           color="primary" 
-          label="Next Visualization" 
+          icon="home"
+          to="/" 
+          />
+          <q-btn
+          class="glossy" 
+          color="primary"
+          label="Next"
+          icon-right="navigate_next"
           to="queryTwo" 
           />
         </q-card-section>
@@ -94,9 +109,7 @@
 </template>
 
 <script>
-
 export default {
-  name: 'queryOne',
   data () {
     return {
       dataFromOracle: [],
@@ -106,7 +119,9 @@ export default {
       year_range: {
         min: 1871,
         max: 2022
-      }
+      },
+      showPlaceholder: true,
+      showVisualization: false
     }
   },
   methods: {
@@ -115,8 +130,17 @@ export default {
       let response = await fetch(`http://localhost:4000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
       let data = await response.json();
       this.dataFromOracle = data;
-      this.progress = false;
       console.log(data);
+      this.progress = false;
+      this.showPlaceholder = false;
+      this.showVisualization = true;
+    },
+    reset () {
+      this.dataFromOracle = [];
+      this.showPlaceholder = true;
+      this.showVisualization = false;
+      this.year_range.min = 1871;
+      this.year_range.max = 2022;
     }
   }
 }
