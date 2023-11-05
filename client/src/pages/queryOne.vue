@@ -1,7 +1,6 @@
 <template>
   <q-page padding>
     <div class="q-gutter-md">
-    
       <q-card>
         <q-card-section>
           <div class="text-h6">
@@ -32,7 +31,6 @@
           </div>
         </q-card-section>
       </q-card>
-
       <q-card>
         <q-card-section>
           <div class="text-h6">
@@ -91,9 +89,7 @@
           />
         </q-card-section>
       </q-card>
-      
     </div>
-
   </q-page>
 </template>
 
@@ -117,15 +113,10 @@ export default {
   methods: {
     async runQuery1 () {
       this.progress = true;
-      // simulate a delay
-      // await new Promise(resolve => setTimeout(resolve, 3000));
-
       let response = await fetch(`http://localhost:4000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
       let data = await response.json();
       this.dataFromOracle = data;
-
       this.progress = false;
-
       console.log(data);
     }
   }

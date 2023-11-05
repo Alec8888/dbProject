@@ -1,13 +1,17 @@
 <template>
   <!-- class="bg-image" -->
   <q-page padding>
-    <q-btn class="glossy q-my-sm" color="primary" label="Start Here" to="queryOne"/>
+    <q-btn class="glossy q-mb-sm" color="primary" label="Start Here" to="queryOne"/>
 
     <div class="row q-gutter-md">
 
       <q-card class="queryCards">
-        
         <q-img fit="cover" src="~/assets/q1-cardImage.png" class="query-img-card">
+          <div class="absolute-full transparent">
+            <q-list class="absolute-full transparent">
+              <q-item to="queryOne" class="absolute-full transparent"></q-item>
+            </q-list>
+          </div>
           <div class="absolute-bottom text-h6">
             {{ q1_title }}
           </div>
@@ -20,6 +24,11 @@
 
       <q-card fit="contain" class="queryCards" >
         <q-img src="~/assets/q2-cardImage.png" class="query-img-card">
+          <div class="absolute-full transparent">
+            <q-list class="absolute-full transparent">
+              <q-item to="queryTwo" class="absolute-full transparent"></q-item>
+            </q-list>
+          </div>
           <div class="absolute-bottom text-h6">
             {{ q2_title }}
           </div>
@@ -32,6 +41,11 @@
 
       <q-card class="queryCards">
         <q-img src="~/assets/q3-cardImage1.png" class="query-img-card">
+          <div class="absolute-full transparent">
+            <q-list class="absolute-full transparent">
+              <q-item to="queryThree" class="absolute-full transparent"></q-item>
+            </q-list>
+          </div>
           <div class="absolute-bottom text-h6">
             {{ q3_title }}
           </div>
@@ -44,6 +58,11 @@
 
       <q-card class="queryCards">
         <q-img src="~/assets/q4-cardImage.png" class="query-img-card">
+          <div class="absolute-full transparent">
+            <q-list class="absolute-full transparent">
+              <q-item to="queryFour" class="absolute-full transparent"></q-item>
+            </q-list>
+          </div>
           <div class="absolute-bottom text-h6">
             {{ q4_title }}
           </div>
@@ -56,6 +75,11 @@
 
       <q-card class="queryCards">
         <q-img src="~/assets/q5-cardImage.png" class="query-img-card">
+          <div class="absolute-full transparent">
+            <q-list class="absolute-full transparent">
+              <q-item to="queryFive" class="absolute-full transparent"></q-item>
+            </q-list>
+          </div>
           <div class="absolute-bottom text-h6">
             {{ q5_title }}
           </div>
@@ -105,8 +129,6 @@ export default defineComponent({
   {
     width: 100%;
     max-width: 350px;
-    clickable: true;
-    
   }
 
 </style>
