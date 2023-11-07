@@ -135,7 +135,7 @@ export default {
     async runQuery2 () {
       this.progress = true;
       
-      let response = await fetch(`http://localhost:4000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`);
+      let response = await fetch(`http://localhost:4000/q2`);
       let data = await response.json();
       this.dataFromOracle = data;
       console.log(data);

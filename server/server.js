@@ -38,17 +38,11 @@ let connectionConfig = {
 async function run(name_submitted) {
   let connection;
   let result;
-
   try {
     connection = await oracledb.getConnection(connectionConfig);
-
     console.log('Successfully connected to Oracle!');
-
-    // test connection
-    // result = await connection.execute("SELECT * FROM DEMOTABLE")
     result = await connection.execute("SELECT name, population FROM CITY WHERE name=:name", {name: name_submitted});
     console.log(result.rows);
-
   } catch (err) {
     console.error('Error connecting to the database', err);
   } finally {
@@ -61,9 +55,31 @@ async function run(name_submitted) {
     }
   }
   return result.rows;
-}
-
-run();
+};
+const fs = require('fs');
+async function runQuery2() {
+  let connection;
+  let result;
+  try {
+    connection = await oracledb.getConnection(connectionConfig);
+    console.log('Successfully connected to Oracle!');
+    const sql = fs.readFileSync('../Queries/query2.sql').toString();
+    result = await connection.execute(sql);
+    console.log(result.rows);
+} catch (err) {
+    console.error('Error connecting to the database', err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error('Error closing the database connection', err);
+      }
+    }
+  }
+  return result.rows;
+};
+// run();
 
 app.use(express.static("../spa/"));
 const server = app.listen(4000, () => {
@@ -75,3 +91,7 @@ app.get('/api', async(req, res) => {
   res.send(rows);
 });
 
+app.get('/q2', async(req, res) => {
+  const rows = await runQuery2();
+  res.send(rows);
+});
