@@ -1,5 +1,4 @@
 <template>
-  
   <q-page padding>
     <div class="q-gutter-md">
       <q-card>
@@ -103,29 +102,33 @@
             </q-list>
           </div>
         </q-card-section>
-        <q-card-section class="q-gutter-sm">
-          <q-btn
-          class="glossy" 
+      </q-card>
+      <div class="q-gutter-md flex justify-center q-mr-lg">
+        <q-btn
+          size="lg"
+          class="glossy"
+          rounded
           color="primary" 
           icon="home"
           to="/" 
-          />
-          <q-btn
-          class="glossy" 
+        />
+        <q-btn
+          class="glossy"
+          rounded
+          size="lg"
           color="primary"
-          label="Prev"
           icon="navigate_before"
           to="/queryOne" 
-          />
-          <q-btn
+        />
+        <q-btn
           class="glossy" 
+          rounded
+          size="lg"
           color="primary"
-          label="Next"
           icon-right="navigate_next"
           to="queryThree" 
-          />
-        </q-card-section>
-      </q-card>
+        />
+      </div>
     </div>
   </q-page>
 </template>
@@ -145,7 +148,9 @@ export default {
       showPlaceholder: true,
       showVisualization: false,
       teams: [],
-      team: ''
+      team: '',
+      current: 2,
+      
 
     }
   },
@@ -170,6 +175,7 @@ export default {
       this.showVisualization = false;
       this.year_range.min = 1871;
       this.year_range.max = 2022;
+      this.team = '';
     },
     async getTeamsInRange() {
       let response = await fetch(`http://localhost:4000/q2/teams_in_range?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);

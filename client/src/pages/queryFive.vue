@@ -89,28 +89,36 @@
           </div>
         </q-card-section>
         <q-card-section class="q-gutter-sm">
-          <q-btn
-          class="glossy" 
+        </q-card-section>
+      </q-card>
+
+      <div class="q-gutter-md flex justify-center q-mr-lg">
+        <q-btn
+          class="glossy"
+          rounded
+          size="lg"
           color="primary" 
           icon="home"
           to="/" 
-          />
-          <q-btn
+        />
+        <q-btn
           class="glossy" 
+          rounded
+          size="lg"
           color="primary"
-          label="Prev"
           icon="navigate_before"
           to="/queryThree" 
-          />
-          <q-btn
+        />
+        <q-btn
           class="glossy" 
+          rounded
+          size="lg"
           color="primary"
-          label="Feedback"
           icon-right="feedback"
           to="feedback" 
-          />
-        </q-card-section>
-      </q-card>
+        />
+
+      </div>
     </div>
   </q-page>
 </template>

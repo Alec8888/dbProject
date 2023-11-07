@@ -88,23 +88,28 @@
             </q-list>
           </div>
         </q-card-section>
-        <q-card-section class="q-gutter-sm">
-          <q-btn
-          class="glossy" 
-          color="primary" 
-          icon="home"
-          to="/" 
-          />
-          <q-btn
-          class="glossy" 
-          color="primary"
-          label="Next"
-          icon-right="navigate_next"
-          to="queryTwo" 
-          />
-        </q-card-section>
       </q-card>
+      
+      <div class="q-gutter-md flex justify-center q-mr-lg">
+        <q-btn
+        class="glossy" 
+        rounded
+        size="lg"
+        color="primary" 
+        icon="home"
+        to="/" 
+        />
+        <q-btn
+        class="glossy" 
+        rounded
+        size="lg"
+        color="primary"
+        icon-right="navigate_next"
+        to="queryTwo" 
+        />
+      </div>
     </div>
+    
   </q-page>
 </template>
 
@@ -112,6 +117,7 @@
 export default {
   data () {
     return {
+      current: 1,
       dataFromOracle: [],
       cityName: 'Tampa',
       country: 'USA',

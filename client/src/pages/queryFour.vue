@@ -88,29 +88,35 @@
             </q-list>
           </div>
         </q-card-section>
-        <q-card-section class="q-gutter-sm">
-          <q-btn
-          class="glossy" 
-          color="primary" 
-          icon="home"
-          to="/" 
-          />
-          <q-btn
-          class="glossy" 
-          color="primary"
-          label="Prev"
-          icon="navigate_before"
-          to="/queryThree" 
-          />
-          <q-btn
-          class="glossy" 
-          color="primary"
-          label="Next"
-          icon-right="navigate_next"
-          to="queryFive" 
-          />
-        </q-card-section>
       </q-card>
+
+      <div class="q-gutter-md flex justify-center q-mr-lg">
+        <q-btn
+        class="glossy"
+        rounded
+        size="lg"
+        color="primary" 
+        icon="home"
+        to="/" 
+        />
+        <q-btn
+        class="glossy"
+        rounded
+        size="lg"
+        color="primary"
+        icon="navigate_before"
+        to="/queryThree" 
+        />
+        <q-btn
+        class="glossy"
+        rounded
+        size="lg"
+        color="primary"
+        icon-right="navigate_next"
+        to="queryFive" 
+        />
+
+      </div>
     </div>
   </q-page>
 </template>
