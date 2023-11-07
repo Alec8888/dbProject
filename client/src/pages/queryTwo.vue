@@ -50,16 +50,31 @@
             markers=true
           />
         </q-card-section>
+
+        <q-card-section>
+            <q-btn 
+              class="glossy"
+              :loading="progress" 
+              color="primary" 
+              @click="getTeamsInRange"
+              label="Get Teams in Range"
+            />
+          </q-card-section>
+
+          <q-card-section>
+            <q-select outlined v-model="team" :options="teams" label="Select a team"/>
+          </q-card-section>
+
         <q-card-section>
           <q-btn 
-            class="glossy"
-            :loading="progress" 
-            color="primary" 
-            @click="runQuery2"
-          >
-            Run Visualization
-            <template v-slot:loading>
-              <q-spinner-gears class="on-left" />
+          class="glossy"
+          :loading="progress" 
+          color="primary" 
+          @click="runQuery2"
+        >
+          Run Visualization
+          <template v-slot:loading>
+          <q-spinner-gears class="on-left" />
               Calculating...
             </template>
           </q-btn>
@@ -128,14 +143,18 @@ export default {
         max: 2022
       },
       showPlaceholder: true,
-      showVisualization: false
+      showVisualization: false,
+      teams: [],
+      team: ''
+
     }
   },
   methods: {
     async runQuery2 () {
+      console.log(this.team)
       this.progress = true;
       
-      let response = await fetch(`http://localhost:4000/q2`);
+      let response = await fetch(`http://localhost:4000/q2?startYear=${this.year_range.min}&endYear=${this.year_range.max}&team=${this.team}`);
       let data = await response.json();
       this.dataFromOracle = data;
       console.log(data);
@@ -151,6 +170,17 @@ export default {
       this.showVisualization = false;
       this.year_range.min = 1871;
       this.year_range.max = 2022;
+    },
+    async getTeamsInRange() {
+      let response = await fetch(`http://localhost:4000/q2/teams_in_range?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
+      let data = await response.json();
+      this.dataFromOracle = data;
+
+      console.log(data);
+      console.log(this.year_range.min);
+      console.log(this.year_range.max);
+
+      this.teams = data;
     }
   }
 }
