@@ -91,7 +91,7 @@
 
         <chartQ2 v-if="showVisualization"
           :labels_xaxis="xlabels"
-          :lineTension="lineTension"
+          :lineTension="smoothCurve"
           :fill="fill1"
           :dataSet1="dataSet1"
         ></chartQ2>
@@ -151,7 +151,7 @@ export default {
   },
   data () {
     return {
-      lineTension: 0.3,
+      smoothCurve: 0.5,
       fill1: false,
       xlabels: [],
 
@@ -213,7 +213,7 @@ export default {
       this.dataFromOracle = data;
       console.log(data);
 
-      this.dataSet1.data = data.map(item => item[0], item => item[1]);
+      this.dataSet1.data = data.map(item => item[1]);
 
       this.progress = false;
       this.showPlaceholder = false;

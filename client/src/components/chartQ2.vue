@@ -3,7 +3,7 @@
     <q-card-section class="bg-blue-grey-8">
       <div class="row items-center no-wrap">
         <div class="col">
-          <div class="text-h6 text-white text-center">Line Chart</div>
+          <div class="text-h6 text-white text-center">Team Spending Per Win</div>
         </div>
       </div>
     </q-card-section>
@@ -42,11 +42,11 @@ export default {
         data: {
           labels: this.labels_xaxis,
           datasets: [{
+            lineTension: this.lineTension,
             data: this.dataSet1.data,
             label: this.dataSet1.label,
             borderColor: this.dataSet1.borderColor,
             fill: this.dataSet1.fill,
-            lineTension: this.dataSet1.lineTension
           }]
         },
         options: {
