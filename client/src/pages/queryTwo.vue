@@ -41,12 +41,12 @@
             <q-range
             name="year_range"
             v-model="year_range"
+            label-always
+            color="primary"
+            :markers=true
             :min="1871"
             :max="2022"
             :step="1"
-            label-always
-            color="primary"
-            markers=true
           />
         </q-card-section>
 
@@ -86,8 +86,20 @@
           />
         </q-card-section>
       </q-card>
+      <q-btn @click="logProps">Log Props</q-btn>
       <q-card>
-        <first-chart></first-chart>
+
+        <first-chart
+          :labels_xaxis="xlabels"
+          :lineTension="lineTension"
+          :fill="fill1"
+          :dataSetData1="{
+            data: data1,
+            label: label1,
+            borderColor: borderColor1,
+          }"
+        ></first-chart>
+
         <q-img v-if="showPlaceholder" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
         
         <q-card-section v-if="showVisualization">
@@ -97,7 +109,7 @@
               <q-item v-for="item in dataFromOracle" :key="item.id">
                 <q-item-section>{{ item[0] }}</q-item-section>
                 <q-item-section>{{ item[1] }}</q-item-section>
-                <q-item-section>{{ item[2] }}</q-item-section>
+                
               </q-item>
             </q-list>
           </div>
@@ -145,6 +157,14 @@ export default {
   },
   data () {
     return {
+      xlabels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+      lineTension: 0.3,
+      fill1: false,
+      data1: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
+      label1: 'Africa',
+      borderColor1: '#3e95cd',
+
+
       dataFromOracle: [],
       progress: false,
       year_range: {
@@ -162,6 +182,9 @@ export default {
 
   },
   methods: {
+    logProps () {
+      console.log(this.dataSetData1)
+    },
     async runQuery2 () {
       console.log(this.team)
       this.progress = true;
