@@ -78,7 +78,7 @@ async function runQuery2(start, end, tID) {
     }
   }
   return result.rows;
-};
+};5
 
 async function getTeamsInRange(start, end) {
   let connection;
@@ -87,6 +87,29 @@ async function getTeamsInRange(start, end) {
     connection = await oracledb.getConnection(connectionConfig);
     console.log('Successfully connected to Oracle!');
     const sql = fs.readFileSync('../Queries/getTeamsInRange.sql').toString();
+    result = await connection.execute(sql, {startYear: start, endYear: end});
+    console.log(result.rows);
+} catch (err) {
+    console.error('Error connecting to the database', err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error('Error closing the database connection', err);
+      }
+    }
+  }
+  return result.rows;
+};
+
+async function runQuery5(start, end) {
+  let connection;
+  let result;
+  try {
+    connection = await oracledb.getConnection(connectionConfig);
+    console.log('Successfully connected to Oracle!');
+    const sql = fs.readFileSync('../Queries/query5.sql').toString();
     result = await connection.execute(sql, {startYear: start, endYear: end});
     console.log(result.rows);
 } catch (err) {
@@ -116,6 +139,11 @@ app.get('/api', async(req, res) => {
 
 app.get('/q2', async(req, res) => {
   const rows = await runQuery2(req.query.startYear, req.query.endYear, req.query.team);
+  res.send(rows);
+});
+
+app.get('/q5', async(req, res) => {
+  const rows = await runQuery5(req.query.startYear, req.query.endYear);
   res.send(rows);
 });
 
