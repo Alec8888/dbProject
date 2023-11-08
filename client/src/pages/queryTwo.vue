@@ -86,18 +86,14 @@
           />
         </q-card-section>
       </q-card>
-      <q-btn @click="logProps">Log Props</q-btn>
+      <q-btn  color="red" @click="debug">debug</q-btn>
       <q-card>
 
         <chartQ2
           :labels_xaxis="xlabels"
           :lineTension="lineTension"
           :fill="fill1"
-          :dataSetData1="{
-            data: data1,
-            label: label1,
-            borderColor: borderColor1,
-          }"
+          :dataSetData1="dataSet1"
         ></chartQ2>
 
         <q-img v-if="showPlaceholder" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
@@ -157,11 +153,16 @@ export default {
   },
   data () {
     return {
-      xlabels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+      dataSet1: {
+        data: data1,
+        label: label1,
+        borderColor: borderColor1,
+      },
+        
       lineTension: 0.3,
       fill1: false,
       data1: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-      label1: 'Africa',
+      label1: '',
       borderColor1: '#3e95cd',
 
       dataFromOracle: [],
@@ -177,15 +178,31 @@ export default {
       current: 2,
     }
   },
+  computed: {
+    xlabels() {
+    return this.generateYears(this.year_range.min, this.year_range.max);
+  }
+  },
   mounted () {
 
   },
   methods: {
-    logProps () {
-      console.log(this.dataSetData1)
+    // not using this yet
+    generateYears(start, end) {
+      let years = [];
+      for (let year = start; year <= end; year += 1) {
+        years.push(year);
+      }
+      return years;
+    },
+    debug () {
+      console.log("debug clicked")
+      console.log(this.year_range.min, this.year_range.max);
     },
     async runQuery2 () {
       console.log(this.team)
+      this.label1 = this.team;
+
       this.progress = true;
       
       let response = await fetch(`http://localhost:4000/q2?startYear=${this.year_range.min}&endYear=${this.year_range.max}&team=${this.team}`);
