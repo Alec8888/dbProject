@@ -21,7 +21,7 @@ export default {
     labels_xaxis: Array,
     lineTension: Number,
     fill: Boolean,
-    dataSetData1: {
+    dataSet1: {
       data: Array,
       label: String,
       borderColor: String,
@@ -42,11 +42,11 @@ export default {
         data: {
           labels: this.labels_xaxis,
           datasets: [{
-            data: this.dataSetData1.data,
-            label: this.dataSetData1.label,
-            borderColor: this.dataSetData1.borderColor,
-            fill: this.dataSetData1.fill,
-            lineTension: this.dataSetData1.lineTension
+            data: this.dataSet1.data,
+            label: this.dataSet1.label,
+            borderColor: this.dataSet1.borderColor,
+            fill: this.dataSet1.fill,
+            lineTension: this.dataSet1.lineTension
           }]
         },
         options: {
