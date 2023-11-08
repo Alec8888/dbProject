@@ -87,8 +87,8 @@
         </q-card-section>
       </q-card>
       <q-card>
-        
-          <q-img v-if="showPlaceholder" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
+        <first-chart></first-chart>
+        <q-img v-if="showPlaceholder" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
         
         <q-card-section v-if="showVisualization">
           <div>
@@ -102,6 +102,7 @@
             </q-list>
           </div>
         </q-card-section>
+
       </q-card>
       <div class="q-gutter-md flex justify-center q-mr-lg">
         <q-btn
@@ -130,16 +131,21 @@
         />
       </div>
     </div>
+    
+
   </q-page>
 </template>
 
 <script>
+import firstChart from '../components/firstChart.vue'
+
 export default {
+  components: {
+    firstChart
+  },
   data () {
     return {
       dataFromOracle: [],
-      cityName: 'Tampa',
-      country: 'USA',
       progress: false,
       year_range: {
         min: 1871,
@@ -150,9 +156,10 @@ export default {
       teams: [],
       team: '',
       current: 2,
-      
-
     }
+  },
+  mounted () {
+
   },
   methods: {
     async runQuery2 () {
@@ -167,7 +174,6 @@ export default {
       this.progress = false;
       this.showPlaceholder = false;
       this.showVisualization = true;
-
     },
     reset () {
       this.dataFromOracle = [];
