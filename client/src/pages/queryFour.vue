@@ -54,7 +54,7 @@
           <q-btn 
             class="glossy"
             :loading="progress" 
-            color="primary" 
+            color="accent" 
             @click="runQuery"
           >
             Run Visualization
@@ -111,7 +111,7 @@
         class="glossy"
         rounded
         size="lg"
-        color="primary"
+        color="accent"
         icon-right="navigate_next"
         to="queryFive" 
         />

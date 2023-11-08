@@ -18,7 +18,7 @@
           :min="1871"
           :max="2022"
           :step="1"
-          :drag-range="true"
+          :drag-range="false"
           />
         </q-card-section>
         
@@ -40,8 +40,8 @@
           <q-btn 
           class="glossy"
           :loading="progress" 
-          color="primary" 
-          @click="runQuery2"
+          color="accent" 
+          @click="runQuery"
           >
           Run Visualization
           <template v-slot:loading>
@@ -50,22 +50,23 @@
           </template>
         </q-btn>
         <q-btn 
-        class="glossy q-ml-sm"
-        :loading="progress" 
-        color="primary" 
-        @click="reset"
-        label="Reset"
+          class="glossy q-ml-sm"
+          :loading="progress" 
+          color="primary" 
+          @click="reset"
+          label="Reset"
         />
       </q-card-section>
     </q-card>
     
     <q-card>
       <chartQ2 v-if="showVisualization"
-      :labels_xaxis="xlabels"
-      :lineTension="smoothCurve"
-      :fill="fill1"
-      :dataSet1="dataSet1"
+        :labels_xaxis="xlabels"
+        :lineTension="smoothCurve"
+        :fill="fill1"
+        :dataSet1="dataSet1"
       ></chartQ2>
+      
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
     </q-card>
     
@@ -121,7 +122,7 @@
       class="glossy" 
           rounded
           size="lg"
-          color="primary"
+          color="accent"
           icon-right="navigate_next"
           to="queryThree" 
         />
@@ -146,7 +147,7 @@ export default {
       dataSet1: {
         data: [],
         label: '',
-        borderColor: '#3e95cd',
+        borderColor: '#1976D2',
       },
         
       dataFromOracle: [],
@@ -171,7 +172,7 @@ export default {
       console.log(this.year_range.min, this.year_range.max);
       console.log(this.team);
     },
-    async runQuery2 () {
+    async runQuery () {
       console.log(this.team)
       console.log(this.year_range.min, this.year_range.max);
 
@@ -188,7 +189,6 @@ export default {
       this.xlabels = data.map(item => item[0]);
 
       this.progress = false;
-      this.showPlaceholder = false;
       this.showVisualization = true;
     },
     reset () {

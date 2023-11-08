@@ -91,7 +91,7 @@
       </q-card>
     </div>
 
-    <q-btn class="glossy q-my-sm" color="primary" label="Start Here" to="queryOne"/>
+    <q-btn class="glossy q-my-sm" color="accent" label="Start Here" to="queryOne"/>
   </q-page>
 </template>
 
