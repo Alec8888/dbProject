@@ -89,7 +89,7 @@
       <q-btn @click="logProps">Log Props</q-btn>
       <q-card>
 
-        <first-chart
+        <chartQ2
           :labels_xaxis="xlabels"
           :lineTension="lineTension"
           :fill="fill1"
@@ -98,7 +98,7 @@
             label: label1,
             borderColor: borderColor1,
           }"
-        ></first-chart>
+        ></chartQ2>
 
         <q-img v-if="showPlaceholder" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
         
@@ -149,11 +149,11 @@
 </template>
 
 <script>
-import firstChart from '../components/firstChart.vue'
+import chartQ2 from '../components/chartQ2.vue'
 
 export default {
   components: {
-    firstChart
+    chartQ2
   },
   data () {
     return {
@@ -163,7 +163,6 @@ export default {
       data1: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
       label1: 'Africa',
       borderColor1: '#3e95cd',
-
 
       dataFromOracle: [],
       progress: false,
