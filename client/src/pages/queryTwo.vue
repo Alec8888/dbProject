@@ -66,6 +66,7 @@
         :lineTension="smoothCurve"
         :fill="fill1"
         :dataSet1="dataSet1"
+        :yaxisTitle="yaxisTitle"
       ></chartCard>
       
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
@@ -143,6 +144,7 @@ export default {
     return {
       smoothCurve: 0.5,
       fill1: false,
+      yaxisTitle: 'Salary per Win',
       xlabels: [],
       chartTitle: 'Team Salary per Win',
 

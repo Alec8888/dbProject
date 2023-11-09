@@ -19,6 +19,7 @@ import Chart from 'chart.js/auto'
 export default {
   props: {
     chartTitle: String,
+    yaxisTitle: String,
     labels_xaxis: Array,
     lineTension: Number,
     fill: Boolean,
@@ -51,6 +52,22 @@ export default {
           }]
         },
         options: {
+          scales: {
+            x: {
+              display: true,
+              title: {
+                display: true,
+                text: 'Seasons'
+              }
+            },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: this.yaxisTitle
+              }
+            }
+          },
           legend: {
             display: true
           },

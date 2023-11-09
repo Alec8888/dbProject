@@ -53,6 +53,7 @@
         :lineTension="smoothCurve"
         :fill="fill1"
         :dataSet1="dataSet1"
+        :yaxisTitle="yaxisTitle"
       ></chartCard>
 
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q5-cardImage.png" class="query-img-card"/>
@@ -132,6 +133,7 @@ export default {
     return {
       smoothCurve: 0.5,
       fill1: false,
+      yaxisTitle: '% of top 5% regular season HR hitters in Postseason',
       xlabels: [],
       chartTitle: 'Percentage of top 5% HR hitters that reached Postseason',
 
