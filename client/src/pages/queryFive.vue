@@ -154,7 +154,6 @@ export default {
     }
   },
   mounted () {
-    this.year_range.min = 2000;
   },
   methods: {
     async runQuery () {
