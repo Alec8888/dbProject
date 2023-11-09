@@ -10,7 +10,7 @@
         </q-card-section>
         <q-card-section>
           <q-range
-          @change="getTeamsInRange"
+          @change="setTeamsInRange"
           name="year_range"
           v-model="year_range"
           label-always
@@ -159,14 +159,24 @@ export default {
   }
   ,
   mounted () {
-    // this.year_range.min = 2000;
-    
+    this.setTeamsInRange()
   },
   methods: {
     debug () {
       console.log("debug clicked")
       console.log(this.year_range.min, this.year_range.max);
       console.log(this.team);
+    },
+    async setTeamsInRange() {
+      let response = await fetch(`http://localhost:4000/q2/teams_in_range?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
+      let data = await response.json();
+      this.dataFromOracle = data;
+
+      console.log(data);
+      console.log(this.year_range.min);
+      console.log(this.year_range.max);
+
+      this.teams = data;
     },
     async runQuery () {
       console.log(this.team)
@@ -193,17 +203,6 @@ export default {
       this.year_range.min = 1871;
       this.year_range.max = 2022;
       this.team = '';
-    },
-    async getTeamsInRange() {
-      let response = await fetch(`http://localhost:4000/q2/teams_in_range?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
-      let data = await response.json();
-      this.dataFromOracle = data;
-
-      console.log(data);
-      console.log(this.year_range.min);
-      console.log(this.year_range.max);
-
-      this.teams = data;
     }
   }
 }
