@@ -25,6 +25,7 @@
         
         <q-card-section>
           <q-select outlined v-model="team" :options="teams" label="Select a team"/>
+          <q-select outlined v-model="team2" :options="teams" label="Select a team"/>
         </q-card-section>
         
         <q-card-section>
@@ -51,49 +52,18 @@
     </q-card>
     
     <q-card>
-      <chartCard v-if="showVisualization"
+      <chartCardQ5 v-if="showVisualization"
         :chartTitle="chartTitle"
         :labels_xaxis="xlabels"
         :lineTension="smoothCurve"
         :fill="fill1"
         :dataSet1="dataSet1"
         :yaxisTitle="yaxisTitle"
-      ></chartCard>
+      ></chartCardQ5>
       
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
     </q-card>
-<!--     
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">
-          Determine the influence over time that team salary has had on the number of wins.
-        </div>
-        <div class="text-body1">
-          The user selects one or many teams and a range of seasons. The salaries of the selected teams are calculated from the players’ and managers' salaries. The spending per win is calculated for each team. The average spending per win for all teams is also calculated, which serves as a reference point. Each year's spending amounts are adjusted for inflation as of the end of 2022.
-        </div>
-      </q-card-section>
-    </q-card>
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">
-          Methodology
-        </div>
-        <div class="text-body1">
-          text body...
-        </div>
-      </q-card-section>
-    </q-card>
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">
-          Analysis and Visualization
-        </div>
-        <div class="text-body1">
-          Text body..  
-        </div>
-      </q-card-section>
-    </q-card> -->
-    
+
     <div class="q-gutter-md flex justify-center q-mr-lg">
       <q-btn
       size="lg"
@@ -125,11 +95,11 @@
 </template>
 
 <script>
-import chartCard from '../components/chartCard.vue'
+import chartCardQ5 from '../components/chartCardQ5.vue'
 
 export default {
   components: {
-    chartCard
+    chartCardQ5
   },
   data () {
     return {
@@ -144,6 +114,11 @@ export default {
         label: '',
         borderColor: '#1976D2',
       },
+      dataSet2: {
+        data: [],
+        label: '',
+        borderColor: '#FFA000',
+      },
         
       dataFromOracle: [],
       progress: false,
@@ -155,6 +130,7 @@ export default {
       teams: [],
       team: '',
       current: 2,
+      team2: '',
     }
   }
   ,
@@ -166,6 +142,7 @@ export default {
       console.log("debug clicked")
       console.log(this.year_range.min, this.year_range.max);
       console.log(this.team);
+      console.log(this.team2);
     },
     async setTeamsInRange() {
       let response = await fetch(`http://localhost:4000/q2/teams_in_range?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
@@ -180,9 +157,11 @@ export default {
     },
     async runQuery () {
       console.log(this.team)
+      console.log(this.team2)
       console.log(this.year_range.min, this.year_range.max);
 
       this.dataSet1.label = this.team;
+      this.dataSet2.label = this.team2;
 
       this.progress = true;
       
@@ -191,8 +170,9 @@ export default {
       this.dataFromOracle = data;
       console.log(data);
       
-      this.dataSet1.data = data.map(item => item[1]);
       this.xlabels = data.map(item => item[0]);
+      this.dataSet1.data = data.map(item => item[1]);
+      this.dataSet2.data = data.map(item => item[2]);
 
       this.progress = false;
       this.showVisualization = true;
@@ -203,6 +183,7 @@ export default {
       this.year_range.min = 1871;
       this.year_range.max = 2022;
       this.team = '';
+      this.team2 = '';
     }
   }
 }
