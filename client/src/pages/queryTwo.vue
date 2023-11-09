@@ -60,12 +60,13 @@
     </q-card>
     
     <q-card>
-      <chartQ2 v-if="showVisualization"
+      <chartCard v-if="showVisualization"
+        :chartTitle="chartTitle"
         :labels_xaxis="xlabels"
         :lineTension="smoothCurve"
         :fill="fill1"
         :dataSet1="dataSet1"
-      ></chartQ2>
+      ></chartCard>
       
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
     </q-card>
@@ -132,17 +133,18 @@
 </template>
 
 <script>
-import chartQ2 from '../components/chartQ2.vue'
+import chartCard from '../components/chartCard.vue'
 
 export default {
   components: {
-    chartQ2
+    chartCard
   },
   data () {
     return {
       smoothCurve: 0.5,
       fill1: false,
       xlabels: [],
+      chartTitle: 'Team Salary per Win',
 
       dataSet1: {
         data: [],

@@ -47,29 +47,15 @@
     </q-card>
 
     <q-card>
-      <chartQ2 v-if="showVisualization"
+      <chartCard v-if="showVisualization"
+        :chartTitle="chartTitle"
         :labels_xaxis="xlabels"
         :lineTension="smoothCurve"
         :fill="fill1"
         :dataSet1="dataSet1"
-      ></chartQ2>
+      ></chartCard>
 
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q5-cardImage.png" class="query-img-card"/>
-      
-      <q-card-section v-if="showVisualization">
-        <div>
-          <!--this list is for the demo sql query-->
-          <q-list bordered separator>
-            <q-item v-for="item in dataFromOracle" :key="item.id">
-              <q-item-section>{{ item[0] }}</q-item-section>
-              <q-item-section>{{ item[1] }}</q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-      </q-card-section>
-
-      <q-card-section class="q-gutter-sm">
-      </q-card-section>
 
     </q-card>
     
@@ -136,21 +122,22 @@
 </template>
 
 <script>
-import chartQ2 from '../components/chartQ2.vue'
+import chartCard from '../components/chartCard.vue'
 
 export default {
   components: {
-    chartQ2
+    chartCard
   },
   data () {
     return {
       smoothCurve: 0.5,
       fill1: false,
       xlabels: [],
+      chartTitle: 'Percentage of top 5% HR hitters that reached Postseason',
 
       dataSet1: {
         data: [],
-        label: 'Label',
+        label: 'HR',
         borderColor: '#1976D2',
       },
 

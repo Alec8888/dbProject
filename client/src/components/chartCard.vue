@@ -3,7 +3,7 @@
     <q-card-section class="bg-blue-grey-8">
       <div class="row items-center no-wrap">
         <div class="col">
-          <div class="text-h6 text-white text-center">Team Spending Per Win</div>
+          <div class="text-h6 text-white text-center">{{ chartTitle }}</div>
         </div>
       </div>
     </q-card-section>
@@ -18,6 +18,7 @@ import Chart from 'chart.js/auto'
 
 export default {
   props: {
+    chartTitle: String,
     labels_xaxis: Array,
     lineTension: Number,
     fill: Boolean,
