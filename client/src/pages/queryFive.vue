@@ -47,14 +47,15 @@
     </q-card>
 
     <q-card>
-      <chartCard v-if="showVisualization"
+      <chartCardQ5 v-if="showVisualization"
         :chartTitle="chartTitle"
         :labels_xaxis="xlabels"
         :lineTension="smoothCurve"
         :fill="fill1"
         :dataSet1="dataSet1"
+        :dataSet2="dataSet2"
         :yaxisTitle="yaxisTitle"
-      ></chartCard>
+      ></chartCardQ5>
 
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q5-cardImage.png" class="query-img-card"/>
 
@@ -70,27 +71,6 @@
         </div>
       </q-card-section>
     </q-card>
-<!-- 
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">
-          Methodology
-        </div>
-        <div class="text-body1">
-          text body...
-        </div>
-      </q-card-section>
-    </q-card>
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">
-          Analysis and Visualization
-        </div>
-        <div class="text-body1">
-          Text body..  
-        </div>
-      </q-card-section>
-    </q-card> -->
 
     <div class="q-gutter-md flex justify-center q-mr-lg">
       <q-btn
@@ -124,11 +104,11 @@
 </template>
 
 <script>
-import chartCard from '../components/chartCard.vue'
+import chartCardQ5 from '../components/chartCardQ5.vue'
 
 export default {
   components: {
-    chartCard
+    chartCardQ5
   },
   data () {
     return {
@@ -140,8 +120,13 @@ export default {
 
       dataSet1: {
         data: [],
-        label: 'HR',
+        label: 'Top HR hitters',
         borderColor: '#1976D2',
+      },
+      dataSet2: {
+        data: [],
+        label: 'All hitters',
+        borderColor: '#FFA000',
       },
 
       dataFromOracle: [],
@@ -164,10 +149,12 @@ export default {
       let response = await fetch(`http://localhost:4000/q5?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
       let data = await response.json();
       this.dataFromOracle = data;
-      console.log(data);
 
-      this.dataSet1.data = data.map(item => item[1]);
+      console.log(data);
+      
       this.xlabels = data.map(item => item[0]);
+      this.dataSet1.data = data.map(item => item[1]);
+      this.dataSet2.data = data.map(item => item[2]);
 
       this.progress = false;
       this.showVisualization = true;

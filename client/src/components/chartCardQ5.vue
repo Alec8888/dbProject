@@ -26,7 +26,12 @@ export default {
       data: Array,
       label: String,
       borderColor: String,
-    }
+    },
+    dataSet2: {
+      data: Array,
+      label: String,
+      borderColor: String,
+    },
   },
   data () {
     return {
@@ -42,12 +47,20 @@ export default {
         type: 'line',
         data: {
           labels: this.labels_xaxis,
-          datasets: [{
-            data: this.dataSet1.data,
-            label: this.dataSet1.label,
-            borderColor: this.dataSet1.borderColor,
-            lineTension: this.lineTension,
-          }]
+          datasets: [
+            {
+              label: this.dataSet1.label,
+              data: this.dataSet1.data,
+              borderColor: this.dataSet1.borderColor,
+              lineTension: this.lineTension,
+            },
+            {
+              label: this.dataSet2.label,
+              data: this.dataSet2.data,
+              borderColor: this.dataSet2.borderColor,
+              lineTension: this.lineTension,
+            }
+          ]
         },
         options: {
           scales: {
