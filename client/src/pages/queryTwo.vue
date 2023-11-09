@@ -25,8 +25,10 @@
         
         <q-card-section>
           <q-select outlined v-model="team" :options="teams" label="Select a team"/>
-          <q-select outlined v-model="team2" :options="teams" label="Select a team"/>
         </q-card-section>
+        <!-- <q-card-section>
+          <q-select outlined v-model="team2" :options="teams" label="Optionally select a seond team"/>
+        </q-card-section> -->
         
         <q-card-section>
           <q-btn 
@@ -52,14 +54,13 @@
     </q-card>
     
     <q-card>
-      <chartCardQ5 v-if="showVisualization"
+      <chartCard v-if="showVisualization"
         :chartTitle="chartTitle"
         :labels_xaxis="xlabels"
         :lineTension="smoothCurve"
-        :fill="fill1"
-        :dataSet1="dataSet1"
+        :dataSets="dataSets"
         :yaxisTitle="yaxisTitle"
-      ></chartCardQ5>
+      ></chartCard>
       
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
     </q-card>
@@ -95,11 +96,11 @@
 </template>
 
 <script>
-import chartCardQ5 from '../components/chartCardQ5.vue'
+import chartCard from '../components/chartCard.vue'
 
 export default {
   components: {
-    chartCardQ5
+    chartCard
   },
   data () {
     return {
@@ -109,16 +110,13 @@ export default {
       xlabels: [],
       chartTitle: 'Team Salary per Win',
 
-      dataSet1: {
-        data: [],
-        label: '',
-        borderColor: '#1976D2',
-      },
-      dataSet2: {
-        data: [],
-        label: '',
-        borderColor: '#FFA000',
-      },
+      dataSets: [
+        {
+          data: [],
+          label: '',
+          borderColor: '#1976D2',
+        }
+      ],
         
       dataFromOracle: [],
       progress: false,
@@ -144,6 +142,11 @@ export default {
       console.log(this.team);
       console.log(this.team2);
     },
+    updateTeamLabels () {
+      for (let i = 1; i <= this.dataSets.length; i++) {
+        this.dataSets[i - 1].label = this.team;
+      }
+    },
     async setTeamsInRange() {
       let response = await fetch(`http://localhost:4000/q2/teams_in_range?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
       let data = await response.json();
@@ -160,8 +163,7 @@ export default {
       console.log(this.team2)
       console.log(this.year_range.min, this.year_range.max);
 
-      this.dataSet1.label = this.team;
-      this.dataSet2.label = this.team2;
+     this.updateTeamLabels()
 
       this.progress = true;
       
@@ -171,8 +173,9 @@ export default {
       console.log(data);
       
       this.xlabels = data.map(item => item[0]);
-      this.dataSet1.data = data.map(item => item[1]);
-      this.dataSet2.data = data.map(item => item[2]);
+      for (let i = 1; i <= this.dataSets.length; i++) {
+        this.dataSets[i - 1].data = data.map(item => item[i]);
+      }
 
       this.progress = false;
       this.showVisualization = true;

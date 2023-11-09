@@ -47,14 +47,13 @@
     </q-card>
 
     <q-card>
-      <chartCardQ5 v-if="showVisualization"
+      <chartCard v-if="showVisualization"
         :chartTitle="chartTitle"
         :labels_xaxis="xlabels"
         :lineTension="smoothCurve"
-        :fill="fill1"
         :dataSets="dataSets" 
         :yaxisTitle="yaxisTitle"
-      ></chartCardQ5>
+      ></chartCard>
 
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q5-cardImage.png" class="query-img-card"/>
 
@@ -103,16 +102,15 @@
 </template>
 
 <script>
-import chartCardQ5 from '../components/chartCardQ5.vue'
+import chartCard from '../components/chartCard.vue'
 
 export default {
   components: {
-    chartCardQ5
+    chartCard
   },
   data () {
     return {
       smoothCurve: 0.5,
-      fill1: false,
       yaxisTitle: '% of top 5% regular season HR hitters in Postseason',
       xlabels: [],
       chartTitle: 'Percentage of top 5% HR hitters that reached Postseason',
