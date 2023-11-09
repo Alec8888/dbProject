@@ -59,7 +59,7 @@
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q5-cardImage.png" class="query-img-card"/>
 
     </q-card>
-    
+<!--     
     <q-card>
       <q-card-section>
         <div class="text-h6">
@@ -89,7 +89,7 @@
           Text body..  
         </div>
       </q-card-section>
-    </q-card>
+    </q-card> -->
 
     <div class="q-gutter-md flex justify-center q-mr-lg">
       <q-btn
