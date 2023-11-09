@@ -8,6 +8,7 @@ const dbPassword = process.env.DB_PASSWORD;
 // EXPRESS 
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 // allow cross origin requests
 const cors = require('cors');
@@ -103,6 +104,49 @@ async function getTeamsInRange(start, end) {
   return result.rows;
 };
 
+// submit feedback async function
+async function submitFeedback(email, name, q1, q2, q3, q4, q5, feedback) {
+  let connection;
+  let result;
+  try {
+    connection = await oracledb.getConnection(connectionConfig);
+    console.log('Successfully connected to Oracle!');
+    const sql = fs.readFileSync('../Queries/submitFeedback.sql').toString();
+    console.log(sql);
+    result = await connection.execute(sql, {email: email, name: name, q1: q1, q2: q2, q3: q3, q4: q4, q5: q5, feedback: feedback}, { autoCommit: true });
+    // console.log(result);
+} catch (err) {
+    console.error('Error connecting to the database', err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error('Error closing the database connection', err);
+      }
+    }
+  }
+  return result;
+};
+
+// set up end point for feedback
+app.post('/feedback', async(req, res) => {
+  console.log(req.body);
+  console.log(req.body.name);
+  console.log(req.body.email);
+  console.log(req.body.q1);
+  console.log(req.body.q2);
+  console.log(req.body.q3);
+  console.log(req.body.q4);
+  console.log(req.body.q5);
+  console.log(req.body.feedback);
+
+  const { email, name, q1, q2, q3, q4, q5, feedback } = req.body;
+  await submitFeedback(email, name, q1, q2, q3, q4, q5, feedback);
+
+  res.send('Feedback received');
+});
+
 async function runQuery5(start, end) {
   let connection;
   let result;
@@ -151,3 +195,4 @@ app.get('/q2/teams_in_range', async(req, res) => {
   const rows = await getTeamsInRange(req.query.startYear, req.query.endYear);
   res.send(rows);
 });
+

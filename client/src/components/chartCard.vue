@@ -61,12 +61,14 @@ export default {
               }
             },
             y: {
-              display: true,
               title: {
                 display: true,
                 text: this.yaxisTitle
+              },
+              ticks: {
+                
               }
-            }
+            },
           },
           legend: {
             display: true
