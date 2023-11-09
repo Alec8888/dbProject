@@ -59,17 +59,18 @@
       <q-img v-if="!showVisualization" fit="fill" src="~/assets/q5-cardImage.png" class="query-img-card"/>
 
     </q-card>
-<!--     
+    
     <q-card>
       <q-card-section>
         <div class="text-h6">
-          Sub title
+          Note:
         </div>
         <div class="text-body1">
-          text body...  
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, praesentium sequi? Perferendis nam fugit, obcaecati incidunt laborum harum sequi cumque doloremque ea, rem facere. Necessitatibus blanditiis adipisci dolor quibusdam sed! 
         </div>
       </q-card-section>
     </q-card>
+<!-- 
     <q-card>
       <q-card-section>
         <div class="text-h6">
