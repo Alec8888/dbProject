@@ -52,8 +52,7 @@
         :labels_xaxis="xlabels"
         :lineTension="smoothCurve"
         :fill="fill1"
-        :dataSet1="dataSet1"
-        :dataSet2="dataSet2"
+        :dataSets="dataSets" 
         :yaxisTitle="yaxisTitle"
       ></chartCardQ5>
 
@@ -118,17 +117,18 @@ export default {
       xlabels: [],
       chartTitle: 'Percentage of top 5% HR hitters that reached Postseason',
 
-      dataSet1: {
-        data: [],
-        label: 'Top HR hitters',
-        borderColor: '#1976D2',
-      },
-      dataSet2: {
-        data: [],
-        label: 'All hitters',
-        borderColor: '#FFA000',
-      },
-
+      dataSets: [
+        {
+          data: [],
+          label: 'Top HR hitters',
+          borderColor: '#1976D2',
+        },
+        {
+          data: [],
+          label: 'All hitters',
+          borderColor: '#FFA000',
+        },
+      ],
       dataFromOracle: [],
       progress: false,
       year_range: {
@@ -153,8 +153,9 @@ export default {
       console.log(data);
       
       this.xlabels = data.map(item => item[0]);
-      this.dataSet1.data = data.map(item => item[1]);
-      this.dataSet2.data = data.map(item => item[2]);
+      for (let i = 1; i <= this.dataSets.length; i++) {
+        this.dataSets[i - 1].data = data.map(item => item[i]);
+      }
 
       this.progress = false;
       this.showVisualization = true;
@@ -165,6 +166,7 @@ export default {
       this.showVisualization = false;
       this.year_range.min = 1871;
       this.year_range.max = 2022;
+      this.dataSets.forEach(dataset => dataset.data = []);
     }
   }
 }

@@ -22,16 +22,7 @@ export default {
     yaxisTitle: String,
     labels_xaxis: Array,
     lineTension: Number,
-    dataSet1: {
-      data: Array,
-      label: String,
-      borderColor: String,
-    },
-    dataSet2: {
-      data: Array,
-      label: String,
-      borderColor: String,
-    },
+    dataSets: Array,
   },
   data () {
     return {
@@ -47,20 +38,12 @@ export default {
         type: 'line',
         data: {
           labels: this.labels_xaxis,
-          datasets: [
-            {
-              label: this.dataSet1.label,
-              data: this.dataSet1.data,
-              borderColor: this.dataSet1.borderColor,
-              lineTension: this.lineTension,
-            },
-            {
-              label: this.dataSet2.label,
-              data: this.dataSet2.data,
-              borderColor: this.dataSet2.borderColor,
-              lineTension: this.lineTension,
-            }
-          ]
+          datasets: this.dataSets.map(dataSet => ({ // Map over the array of datasets
+            label: dataSet.label,
+            data: dataSet.data,
+            borderColor: dataSet.borderColor,
+            lineTension: this.lineTension,
+          })),
         },
         options: {
           scales: {
