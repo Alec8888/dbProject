@@ -1,22 +1,7 @@
-<!-- <template>
-  <q-page padding>
-    <h1>FeedBack</h1>
-    <h2></h2>
-    <p>Please complete the form below.</p>
-  </q-page>
-</template>
-
-<script>
-export default {
-  // name: 'PageName',
-}
-</script> -->
-
-
 <template>
-  <q-page padding>
+  <q-page padding class="column items-center">
 
-    <div style="max-width: 800px;">
+    <div style="max-width: 800px;" >
       <q-card>
         <q-card-section>
           <div class="text-h5">
@@ -60,13 +45,13 @@ export default {
             <div class="text-h6">
               Select all visualizations for which you are leaving feedback:
             </div>
-      
-            <q-option-group
-              :options="queries"
-              type="checkbox"
-              v-model="group"
-            />
-      
+
+            <q-checkbox right-label v-model="q1" label="Runs-to-Outs by Salary Range" />
+            <q-checkbox right-label v-model="q2" label="Team Spending Per Win" />
+            <q-checkbox right-label v-model="q3" label="Foreign-born players" />
+            <q-checkbox right-label v-model="q4" label="Player hieght and performance" />
+            <q-checkbox right-label v-model="q5" label="Home Runs & Post Season" />
+            
             <q-input
               v-model="feedbackBody"
               label="Write feedback here..."
@@ -82,7 +67,8 @@ export default {
           </q-form>
         </q-card-section> 
       </q-card>
-  
+
+      <q-img  src="~/assets/feedback3.png" style="max-width: 800px;"/>
   
     </div>
   </q-page>
@@ -91,6 +77,7 @@ export default {
 
 <script>
 import { useQuasar } from 'quasar'
+import { Notify } from 'quasar'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -104,58 +91,86 @@ export default {
         const name = ref(null);
         const email = ref(null);
         const feedbackBody = ref(null);
-        const group = ref([]);
+        const q1 = ref(false);
+        const q2 = ref(false);
+        const q3 = ref(false);
+        const q4 = ref(false);
+        const q5 = ref(false);
 
-
-        // define methods here, if any
 
         return {
-
+            q1,
+            q2,
+            q3,
+            q4,
+            q5,
             name,
             email,
-            group: ref([]),
-            queries: [
-              { label: "Runs-to-Outs by Salary Range", value: 'q1'},
-              { label: "Team Spending Per Win", value: 'q2'},
-              { label: "Foreign-born players", value: 'q3'},
-              { label: "Player hieght and performance", value: 'q4'},
-              { label: "Home Runs & Post Season", value: 'q5'},
-            ],
+            feedbackBody,
+            debug() {
+              console.log(name.value);
+              console.log(email.value);
+              console.log(q1.value);
+              console.log(q2.value);
+              console.log(q3.value);
+              console.log(q4.value);
+              console.log(q5.value);
+              console.log(feedbackBody.value);
+            },
 
             async onSubmit() {
               console.log(name.value);
               console.log(email.value);
               console.log(feedbackBody.value);
-              // log group to console
-              console.log(group.value[0]);
 
-              let response = await fetch('http://localhost:8000/#/api', {
+              let response = await fetch('http://localhost:4000/feedback', {
                   method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
                   body: JSON.stringify({
-                      name: name.value,
                       email: email.value,
-                      which_queries: group.value // is this right?
+                      name: name.value,
+                      q1: q1.value ? 1 : 0,
+                      q2: q2.value ? 1 : 0,
+                      q3: q3.value ? 1 : 0,
+                      q4: q4.value ? 1 : 0,
+                      q5: q5.value ? 1 : 0,
+                      feedback: feedbackBody.value
                   })
               });
 
-              let formResponse = await response.json();
-              if (formResponse.isSuccess) {
-                $q.notify({
-                      color: 'green-4',
+              console.log(response);
+              if (response.ok) {
+                // $q.notify({
+                //       color: 'green-4',
+                //       textColor: 'white',
+                //       icon: 'cloud_done',
+                //       message: 'Form submitted successfully'
+                //   });
+
+                  router.push('/thanks');
+              }
+              else {
+                  $q.notify({
+                      color: 'red-4',
                       textColor: 'white',
                       icon: 'cloud_done',
-                      message: 'Form submitted successfully'
+                      message: 'Form submission failed'
                   });
-
-                  // simulate a delay
-                  await new Promise(resolve => setTimeout(resolve, 3000));
-
-                  router.push('/thankyou');
               }
 
       },
             onReset() {
                 name.value = null;
+                email.value = null;
+                feedbackBody.value = null;
+                // this.group = [];
+                this.q1 = false;
+                this.q2 = false;
+                this.q3 = false;
+                this.q4 = false;
+                this.q5 = false;
 
             }
         };

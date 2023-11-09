@@ -84,6 +84,12 @@ const linksList = [
     caption: 'Home Runs & Post Season',
     icon: 'sports_baseball',
     link: '#/queryFive'
+  },
+  {
+    title: 'Feedback',
+    caption: 'Submit Feedback or general inquiries',
+    icon: 'feedback',
+    link: '#/feedback'
   }
 ]
 

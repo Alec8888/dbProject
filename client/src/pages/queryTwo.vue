@@ -10,25 +10,16 @@
         </q-card-section>
         <q-card-section>
           <q-range
+          @change="getTeamsInRange"
           name="year_range"
           v-model="year_range"
           label-always
           color="primary"
           :markers=false
-          :min="1871"
+          :min="1985"
           :max="2022"
           :step="1"
           :drag-range="false"
-          />
-        </q-card-section>
-        
-        <q-card-section>
-          <q-btn 
-          class="glossy"
-          :loading="progress" 
-          color="primary" 
-          @click="getTeamsInRange"
-          label="Get Teams in Range"
           />
         </q-card-section>
         
@@ -157,7 +148,7 @@ export default {
       dataFromOracle: [],
       progress: false,
       year_range: {
-        min: 1871,
+        min: 1985,
         max: 2022
       },
       showVisualization: false,
@@ -168,7 +159,8 @@ export default {
   }
   ,
   mounted () {
-    this.year_range.min = 2000;
+    // this.year_range.min = 2000;
+    
   },
   methods: {
     debug () {

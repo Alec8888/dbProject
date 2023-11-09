@@ -1,9 +1,12 @@
 <template>
   <!-- class="bg-image" -->
-  <q-page padding>
+  <q-page >
     <!-- <q-btn class="glossy q-mb-sm" color="primary" label="Start Here" to="queryOne"/> -->
+    <div class=" row justify-center">
+      <q-img  src="~/assets/feedback3.png" style="max-width: 1300px;" class="justify-center q-mb-sm"/>
 
-    <div class="row q-gutter-md">
+    </div>
+    <div class="row q-gutter-md justify-center">
 
       <q-card class="queryCards">
         <q-img fit="cover" src="~/assets/q1-cardImage.png" class="query-img-card">
@@ -91,7 +94,10 @@
       </q-card>
     </div>
 
-    <q-btn class="glossy q-my-sm" color="accent" label="Start Here" to="queryOne"/>
+    <div class=" row justify-center">
+      <q-btn class="glossy q-my-sm" color="accent" label="Start Here" to="queryOne"/>
+
+    </div>
   </q-page>
 </template>
 
