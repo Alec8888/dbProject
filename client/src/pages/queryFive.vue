@@ -120,11 +120,15 @@ export default {
           data: [],
           label: 'Top HR hitters',
           borderColor: '#1976D2',
+          backgroundColor: "#FFA000",
+          fill: '1',
         },
         {
           data: [],
           label: 'All hitters',
-          borderColor: '#FFA000',
+          borderColor: '#1976D2',
+          backgroundColor: "#1976D2",
+          fill: false,
         },
       ],
       dataFromOracle: [],
@@ -151,9 +155,8 @@ export default {
       console.log(data);
       
       this.xlabels = data.map(item => item[0]);
-      for (let i = 1; i <= this.dataSets.length; i++) {
-        this.dataSets[i - 1].data = data.map(item => item[i]);
-      }
+      this.dataSets[0].data = data.map(item => item[1]);
+      this.dataSets[1].data = data.map(item => item[2]);
 
       this.progress = false;
       this.showVisualization = true;

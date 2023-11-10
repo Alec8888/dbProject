@@ -1,12 +1,12 @@
 <template>
   <q-card class="bg-white full-width">
-    <q-card-section class="bg-blue-grey-8">
+    <!-- <q-card-section class="bg-blue-grey-8">
       <div class="row items-center no-wrap">
         <div class="col">
           <div class="text-h6 text-white text-center">{{ chartTitle }}</div>
         </div>
       </div>
-    </q-card-section>
+    </q-card-section> -->
     <q-card-section>
       <canvas id="line-chart"></canvas>
     </q-card-section>
@@ -23,6 +23,8 @@ export default {
     labels_xaxis: Array,
     lineTension: Number,
     dataSets: Array,
+    backgroundColor: String,
+    fill: String,
   },
   data () {
     return {
@@ -38,14 +40,24 @@ export default {
         type: 'line',
         data: {
           labels: this.labels_xaxis,
-          datasets: this.dataSets.map(dataSet => ({ // Map over the array of datasets
+          datasets: this.dataSets.map(dataSet => ({ 
+            lineTension: this.lineTension,
+            fill: dataSet.fill,
             label: dataSet.label,
             data: dataSet.data,
             borderColor: dataSet.borderColor,
-            lineTension: this.lineTension,
+            backgroundColor: dataSet.backgroundColor,
           })),
         },
         options: {
+          responsive: true,
+          animation: {
+            duration: 1000
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
           scales: {
             x: {
               display: true,
@@ -64,13 +76,16 @@ export default {
               }
             },
           },
-          legend: {
-            display: true
+          plugins: {
+            title: {
+              display: true,
+              text: this.chartTitle,
+            },
+            legend: {
+              display: true
+            },
+            
           },
-          title: {
-            display: true,
-            text: 'World population per region (in millions)'
-          }
         }
       })
       return myChart

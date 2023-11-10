@@ -115,6 +115,7 @@ export default {
           data: [],
           label: '',
           borderColor: '#1976D2',
+          fill: true,
         }
       ],
         
