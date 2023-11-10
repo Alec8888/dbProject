@@ -119,15 +119,13 @@ export default {
         {
           data: [],
           label: 'Top HR hitters',
-          borderColor: '#1976D2',
-          backgroundColor: "#FFA000",
+          borderColor: '#FFA000',
           fill: '1',
         },
         {
           data: [],
           label: 'All hitters',
           borderColor: '#1976D2',
-          backgroundColor: "#1976D2",
           fill: false,
         },
       ],

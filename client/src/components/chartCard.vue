@@ -42,6 +42,7 @@ export default {
           labels: this.labels_xaxis,
           datasets: this.dataSets.map(dataSet => ({ 
             lineTension: this.lineTension,
+            tension: 0.1,
             fill: dataSet.fill,
             label: dataSet.label,
             data: dataSet.data,
@@ -52,7 +53,7 @@ export default {
         options: {
           responsive: true,
           animation: {
-            duration: 1000
+            duration: 4000, 
           },
           interaction: {
             intersect: false,
