@@ -160,6 +160,7 @@ export default {
       this.teams = data;
     },
     async runQuery () {
+      this.showVisualization = false;
       console.log(this.team)
       console.log(this.team2)
       console.log(this.year_range.min, this.year_range.max);

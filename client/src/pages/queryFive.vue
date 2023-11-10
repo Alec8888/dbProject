@@ -142,6 +142,8 @@ export default {
   },
   methods: {
     async runQuery () {
+      this.showVisualization = false;
+
       console.log(this.year_range.min, this.year_range.max);
 
       this.progress = true;
