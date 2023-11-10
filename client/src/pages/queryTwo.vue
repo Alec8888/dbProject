@@ -17,7 +17,7 @@
           color="primary"
           :markers=false
           :min="1985"
-          :max="2022"
+          :max="2016"
           :step="1"
           :drag-range="false"
           />
@@ -124,7 +124,7 @@ export default {
       progress: false,
       year_range: {
         min: 1985,
-        max: 2022
+        max: 2016
       },
       showVisualization: false,
       showPlaceHolder: true,
