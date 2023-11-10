@@ -126,8 +126,15 @@ export default {
         max: 2022
       },
       showVisualization: false,
-      teams: [],
-      team: '',
+      teams: [
+        {
+          label: '',
+          value: ''
+        }
+      ],
+      team: {
+        label: '',
+        value: ''},
       current: 2,
       team2: '',
     }
@@ -145,7 +152,7 @@ export default {
     },
     updateTeamLabels () {
       for (let i = 1; i <= this.dataSets.length; i++) {
-        this.dataSets[i - 1].label = this.team;
+        this.dataSets[i - 1].label = this.team.value;
       }
     },
     async setTeamsInRange() {
@@ -157,7 +164,7 @@ export default {
       console.log(this.year_range.min);
       console.log(this.year_range.max);
 
-      this.teams = data;
+      this.teams = data.map(item => ({label: item[1], value: item[0]}));
     },
     async runQuery () {
       this.showVisualization = false;
@@ -169,7 +176,7 @@ export default {
 
       this.progress = true;
       
-      let response = await fetch(`http://localhost:4000/q2?startYear=${this.year_range.min}&endYear=${this.year_range.max}&team=${this.team}`);
+      let response = await fetch(`http://localhost:4000/q2?startYear=${this.year_range.min}&endYear=${this.year_range.max}&team=${this.team.value}`);
       let data = await response.json();
       this.dataFromOracle = data;
       console.log(data);
