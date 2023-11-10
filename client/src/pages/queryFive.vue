@@ -47,6 +47,8 @@
     </q-card>
 
     <q-card>
+      <q-linear-progress v-if="showLoading" indeterminate rounded size="20px" color="secondary"/>
+
       <chartCard v-if="showVisualization"
         :chartTitle="chartTitle"
         :labels_xaxis="xlabels"
@@ -55,7 +57,7 @@
         :yaxisTitle="yaxisTitle"
       ></chartCard>
 
-      <q-img v-if="!showVisualization" fit="fill" src="~/assets/q5-cardImage.png" class="query-img-card"/>
+      <q-img v-if="showPlaceHolder" fit="fill" src="~/assets/q5-cardImage.png" class="query-img-card"/>
 
     </q-card>
     
@@ -135,15 +137,18 @@ export default {
         min: 1871,
         max: 2022
       },
-      showVisualization: false
+      showVisualization: false,
+      showPlaceHolder: true,
+      showLoading: false,
     }
   },
   mounted () {
   },
   methods: {
     async runQuery () {
+      this.showPlaceHolder = false;
       this.showVisualization = false;
-
+      this.showLoading = true;
       console.log(this.year_range.min, this.year_range.max);
 
       this.progress = true;
@@ -159,6 +164,7 @@ export default {
       this.dataSets[1].data = data.map(item => item[2]);
 
       this.progress = false;
+      this.showLoading = false;
       this.showVisualization = true;
 
     },

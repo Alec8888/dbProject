@@ -54,6 +54,7 @@
     </q-card>
     
     <q-card>
+      <q-linear-progress v-if="showLoading" indeterminate rounded size="20px" color="secondary"/>
       <chartCard v-if="showVisualization"
         :chartTitle="chartTitle"
         :labels_xaxis="xlabels"
@@ -62,7 +63,7 @@
         :yaxisTitle="yaxisTitle"
       ></chartCard>
       
-      <q-img v-if="!showVisualization" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
+      <q-img v-if="showPlaceHolder" fit="fill" src="~/assets/q2-cardImage.png" class="query-img-card"/>
     </q-card>
 
     <div class="q-gutter-md flex justify-center q-mr-lg">
@@ -126,6 +127,8 @@ export default {
         max: 2022
       },
       showVisualization: false,
+      showPlaceHolder: true,
+      showLoading: false,
       teams: [
         {
           label: '',
@@ -167,6 +170,7 @@ export default {
       this.teams = data.map(item => ({label: item[1], value: item[0]}));
     },
     async runQuery () {
+      this.showLoading = true;
       this.showVisualization = false;
       console.log(this.team)
       console.log(this.team2)
@@ -187,6 +191,8 @@ export default {
       }
 
       this.progress = false;
+      this.showPlaceHolder = false;
+      this.showLoading = false;
       this.showVisualization = true;
     },
     reset () {
