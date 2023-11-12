@@ -157,6 +157,11 @@ export default {
           value: "",
         },
       ],
+
+      team: {
+        label: "",
+        value: "",
+      },
     };
   },
   mounted() {
