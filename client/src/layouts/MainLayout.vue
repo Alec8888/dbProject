@@ -19,16 +19,9 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" bordered>
       <q-list>
-        <q-item-label
-          header
-        >
-          Navigation
-        </q-item-label>
+        <q-item-label header> Navigation </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -45,79 +38,78 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { defineComponent, ref } from "vue";
+import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
   {
-    title: 'Home',
-    caption: 'Baseball Statistics Visualizations',
-    icon: 'home',
-    link: '#/'
+    title: "Home",
+    caption: "Baseball Statistics Visualizations",
+    icon: "home",
+    link: "#/",
   },
   {
-    title: 'Query 1',
-    caption: 'Runs-to-Outs by Salary range',
-    icon: 'sports_baseball',
-    link: '#/queryOne'
+    title: "Query 1",
+    caption: "Runs-to-Outs by Salary range",
+    icon: "sports_baseball",
+    link: "#/queryOne",
   },
   {
-    title: 'Query 2',
-    caption: 'Team Spending Per Win',
-    icon: 'sports_baseball',
-    link: '#/queryTwo'
+    title: "Query 2",
+    caption: "Team Spending Per Win",
+    icon: "sports_baseball",
+    link: "#/queryTwo",
   },
   {
-    title: 'Query 3',
-    caption: 'Foreign-born MLB player distributions',
-    icon: 'sports_baseball',
-    link: '#/queryThree'
+    title: "Query 3",
+    caption: "Foreign-born MLB player distributions",
+    icon: "sports_baseball",
+    link: "#/queryThree",
   },
   {
-    title: 'Query 4',
-    caption: 'Player Height & Performance',
-    icon: 'sports_baseball',
-    link: '#/queryFour'
+    title: "Query 4",
+    caption: "Player Height & Performance",
+    icon: "sports_baseball",
+    link: "#/queryFour",
   },
   {
-    title: 'Query 5',
-    caption: 'Home Runs & Post Season',
-    icon: 'sports_baseball',
-    link: '#/queryFive'
+    title: "Query 5",
+    caption: "Home Runs & Post Season",
+    icon: "sports_baseball",
+    link: "#/queryFive",
   },
   {
-    title: 'Feedback',
-    caption: 'Submit Feedback or general inquiries',
-    icon: 'feedback',
-    link: '#/feedback'
-  }
-]
+    title: "Feedback",
+    caption: "Submit Feedback or general inquiries",
+    icon: "feedback",
+    link: "#/feedback",
+  },
+];
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: "MainLayout",
 
   components: {
-    EssentialLink
+    EssentialLink,
   },
 
-  setup () {
-    const leftDrawerOpen = ref(false)
+  setup() {
+    const leftDrawerOpen = ref(false);
 
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
-})
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+    };
+  },
+});
 </script>
 
-<style >
-  .bg-image {
-    background-image: url('C:/dev/dbProject/client/src/assets/bg1.png');
-    background-size: fit;
-  }
-
+<style>
+.bg-image {
+  background-image: url("../assets/bg1.png");
+  background-size: fit;
+}
 </style>
