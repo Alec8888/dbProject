@@ -40,7 +40,7 @@ export default {
               data: this.dataSetsY1[0].data,
             },
             {
-              label: "Winning Percentage",
+              label: "Win Percentage",
               data: this.dataSetsY2[0].data,
             },
           ],
@@ -68,7 +68,6 @@ export default {
                 text: this.yAxis1Title,
               },
               type: "linear",
-              display: true,
               position: "left",
             },
             y1: {
@@ -77,12 +76,10 @@ export default {
                 text: this.yAxis2Title,
               },
               type: "linear",
-              display: true,
               position: "right",
 
-              // grid line settings
               grid: {
-                drawOnChartArea: false, // only want the grid lines for one axis to show up
+                drawOnChartArea: false, // Only show the grid lines for Y1 axis.
               },
             },
           },
