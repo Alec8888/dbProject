@@ -30,9 +30,6 @@
             label="Select a team"
           />
         </q-card-section>
-        <!-- <q-card-section>
-          <q-select outlined v-model="team2" :options="teams" label="Optionally select a seond team"/>
-        </q-card-section> -->
 
         <q-card-section>
           <q-btn
@@ -65,14 +62,16 @@
           size="20px"
           color="secondary"
         />
-        <chartCard
+        <LineChart
           v-if="showVisualization"
           :chartTitle="chartTitle"
-          :labels_xaxis="xlabels"
+          :xAxisLabels="xAxisLabels"
           :lineTension="smoothCurve"
-          :dataSets="dataSets"
-          :yaxisTitle="yaxisTitle"
-        ></chartCard>
+          :dataSetsY1="dataSetsY1"
+          :dataSetsY2="dataSetsY2"
+          :yAxis1Title="yAxis1Title"
+          :yAxis2Title="yAxis2Title"
+        ></LineChart>
 
         <q-img
           v-if="showPlaceHolder"
@@ -113,21 +112,22 @@
 </template>
 
 <script>
-import chartCard from "../components/chartCard.vue";
+import LineChart from "../components/LineChart.vue";
 
 export default {
   components: {
-    chartCard,
+    LineChart,
   },
   data() {
     return {
       smoothCurve: 0.5,
       fill1: false,
-      yaxisTitle: "Foreign-born Player Percentage(%)",
-      xlabels: [],
+      yAxis1Title: "Foreign-born Player Percentage(%)",
+      yAxis2Title: "Win Percentange(%)",
+      xAxisLabels: [],
       chartTitle: "The Effect of Foreign-born Team Percentage on Winning",
 
-      dataSets: [
+      dataSetsY1: [
         {
           data: [],
           label: "",
@@ -135,8 +135,14 @@ export default {
           fill: true,
         },
       ],
-
-      dataFromOracle: [],
+      dataSetsY2: [
+        {
+          data: [],
+          label: "",
+          borderColor: "#1976D2",
+          fill: true,
+        },
+      ],
       progress: false,
       year_range: {
         min: 1985,
@@ -151,12 +157,6 @@ export default {
           value: "",
         },
       ],
-      team: {
-        label: "",
-        value: "",
-      },
-      current: 2,
-      team2: "",
     };
   },
   mounted() {
@@ -166,20 +166,17 @@ export default {
     debug() {
       console.log("debug clicked");
       console.log(this.year_range.min, this.year_range.max);
-      console.log(this.team);
-      console.log(this.team2);
     },
+
     updateTeamLabels() {
-      for (let i = 1; i <= this.dataSets.length; i++) {
-        this.dataSets[i - 1].label = this.team.value;
-      }
+      this.dataSetsY1[0].label = this.team.value;
     },
+
     async setTeamsInRange() {
       let response = await fetch(
         `http://localhost:4000/q3/teams_in_range?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
       );
       let data = await response.json();
-      this.dataFromOracle = data;
 
       console.log(data);
       console.log(this.year_range.min);
@@ -187,11 +184,10 @@ export default {
 
       this.teams = data.map((item) => ({ label: item[1], value: item[0] }));
     },
+
     async runQuery() {
       this.showLoading = true;
       this.showVisualization = false;
-      console.log(this.team);
-      console.log(this.team2);
       console.log(this.year_range.min, this.year_range.max);
 
       this.updateTeamLabels();
@@ -202,26 +198,21 @@ export default {
         `http://localhost:4000/q3?startYear=${this.year_range.min}&endYear=${this.year_range.max}&team=${this.team.value}`
       );
       let data = await response.json();
-      this.dataFromOracle = data;
-      console.log(data);
+      this.xAxisLabels = data.map((item) => item[0]);
 
-      this.xlabels = data.map((item) => item[0]);
-      for (let i = 1; i <= this.dataSets.length; i++) {
-        this.dataSets[i - 1].data = data.map((item) => item[i]);
-      }
+      this.dataSetsY1[0].data = data.map((item) => item[1]);
+      this.dataSetsY2[0].data = data.map((item) => item[2]);
 
       this.progress = false;
       this.showPlaceHolder = false;
       this.showLoading = false;
       this.showVisualization = true;
     },
+
     reset() {
-      this.dataFromOracle = [];
       this.showVisualization = false;
       this.year_range.min = 1871;
       this.year_range.max = 2022;
-      this.team = "";
-      this.team2 = "";
     },
   },
 };
