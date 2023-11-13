@@ -135,7 +135,7 @@ export default {
         {
           data: [],
           label: "",
-          borderColor: "#1976D2",
+          borderColor: "#26A69A",
           fill: true,
         },
       ],
