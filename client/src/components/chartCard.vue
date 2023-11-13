@@ -1,12 +1,5 @@
 <template>
   <q-card class="bg-white full-width">
-    <!-- <q-card-section class="bg-blue-grey-8">
-      <div class="row items-center no-wrap">
-        <div class="col">
-          <div class="text-h6 text-white text-center">{{ chartTitle }}</div>
-        </div>
-      </div>
-    </q-card-section> -->
     <q-card-section>
       <canvas id="line-chart"></canvas>
     </q-card-section>

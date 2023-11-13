@@ -206,6 +206,7 @@ export default {
       console.log(data);
 
       this.xlabels = data.map((item) => item[0]);
+      // add a dataset for each column (team), except the first (year)
       for (let i = 1; i <= this.dataSets.length; i++) {
         this.dataSets[i - 1].data = data.map((item) => item[i]);
       }
