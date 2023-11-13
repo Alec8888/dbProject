@@ -62,16 +62,14 @@
           size="20px"
           color="secondary"
         />
-        <LineChart
+        <chartCard
           v-if="showVisualization"
           :chartTitle="chartTitle"
-          :xAxisLabels="xAxisLabels"
+          :labels_xaxis="xAxisLabels"
           :lineTension="smoothCurve"
-          :dataSetsY1="dataSetsY1"
-          :dataSetsY2="dataSetsY2"
-          :yAxis1Title="yAxis1Title"
-          :yAxis2Title="yAxis2Title"
-        ></LineChart>
+          :dataSets="dataSets"
+          :yAxisTitles="[yAxis1Title, yAxis2Title]"
+        ></chartCard>
 
         <q-img
           v-if="showPlaceHolder"
@@ -112,11 +110,11 @@
 </template>
 
 <script>
-import LineChart from "../components/LineChart.vue";
+import chartCard from "../components/chartCard.vue";
 
 export default {
   components: {
-    LineChart,
+    chartCard,
   },
   data() {
     return {
@@ -127,15 +125,13 @@ export default {
       xAxisLabels: [],
       chartTitle: "The Effect of Foreign-born Team Percentage on Winning",
 
-      dataSetsY1: [
+      dataSets: [
         {
           data: [],
           label: "",
           borderColor: "#1976D2",
           fill: true,
         },
-      ],
-      dataSetsY2: [
         {
           data: [],
           label: "",
@@ -174,7 +170,8 @@ export default {
     },
 
     updateTeamLabels() {
-      this.dataSetsY1[0].label = this.team.value;
+      this.dataSets[0].label = this.team.value + " Win %";
+      this.dataSets[1].label = this.team.value + " Foreign-born %";
     },
 
     async setTeamsInRange() {
@@ -205,8 +202,8 @@ export default {
       let data = await response.json();
       this.xAxisLabels = data.map((item) => item[0]);
 
-      this.dataSetsY1[0].data = data.map((item) => item[1]);
-      this.dataSetsY2[0].data = data.map((item) => item[2]);
+      this.dataSets[0].data = data.map((item) => item[1]);
+      this.dataSets[1].data = data.map((item) => item[2]);
 
       this.progress = false;
       this.showPlaceHolder = false;

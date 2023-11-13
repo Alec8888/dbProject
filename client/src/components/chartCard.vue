@@ -13,6 +13,10 @@ export default {
   props: {
     chartTitle: String,
     yaxisTitle: String,
+
+    yAxisTitle2: String,
+    yAxisDisplay: Boolean,
+
     labels_xaxis: Array,
     lineTension: Number,
     dataSets: Array,
@@ -69,6 +73,19 @@ export default {
                 
               }
             },
+            ...(this.yAxisTitle2 ? {
+              y1: {
+                display: this.yAxisDisplay,
+                position: 'right',
+                title: {
+                  display: true,
+                  text: this.yAxisTitle2
+                },
+                ticks: {
+                  
+                }
+              }
+            } : {})
           },
           plugins: {
             title: {
