@@ -131,9 +131,20 @@ export default {
         {
           data: [],
           label: "",
-          borderColor: "#1976D2",
-          fill: true,
+          borderColor: "#26A69A",
+          fill: {
+            target: "1",
+            above: "#C10015",
+            below: "#21BA45",
+          }
+
         },
+        {
+          data: [],
+          label: "",
+          borderColor: "#1976D2",
+          fill: false,
+        }
       ],
 
       dataFromOracle: [],
@@ -194,7 +205,9 @@ export default {
       console.log(this.team2);
       console.log(this.year_range.min, this.year_range.max);
 
-      this.updateTeamLabels();
+      // this.updateTeamLabels();
+      this.dataSets[0].label = this.team.value;
+      this.dataSets[1].label = 'All Teams'
 
       this.progress = true;
 
