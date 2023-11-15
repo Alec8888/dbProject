@@ -132,6 +132,7 @@ export default {
           data: [],
           label: "",
           borderColor: "#26A69A",
+          pointRadius: 0,
           fill: {
             target: "1",
             above: "#C10015",
@@ -143,6 +144,7 @@ export default {
           data: [],
           label: "",
           borderColor: "#1976D2",
+          pointRadius: 0,
           fill: false,
         }
       ],

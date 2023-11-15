@@ -22,6 +22,7 @@ export default {
     dataSets: Array,
     backgroundColor: String,
     fill: String,
+    pointsRadius: Number,
   },
   data () {
     return {
@@ -44,6 +45,7 @@ export default {
             data: dataSet.data,
             borderColor: dataSet.borderColor,
             backgroundColor: dataSet.backgroundColor,
+            pointRadius: dataSet.pointRadius,
           })),
         },
         options: {

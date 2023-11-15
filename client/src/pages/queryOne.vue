@@ -164,18 +164,21 @@ export default {
           label: "High Salary",
           borderColor: "#FFA000",
           fill: false,
+          pointRadius: 0,
         },
         {
           data: [],
           label: "Medium Salary",
           borderColor: "#1976D2",
           fill: false,
+          pointRadius: 0,
         },
         {
           data: [],
           label: "Low Salary",
           borderColor: "#FF0000",
           fill: false,
+          pointRadius: 0,
         }
       ]
 

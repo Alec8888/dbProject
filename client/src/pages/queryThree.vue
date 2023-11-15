@@ -68,7 +68,7 @@
           :labels_xaxis="xAxisLabels"
           :lineTension="smoothCurve"
           :dataSets="dataSets"
-          :yAxisTitles="[yAxis1Title, yAxis2Title]"
+          :yaxisTitle="yAxisTitle"
         ></chartCard>
 
         <q-img
@@ -120,8 +120,7 @@ export default {
     return {
       smoothCurve: 0.5,
       fill1: false,
-      yAxis1Title: "Foreign-born Player Percentage(%)",
-      yAxis2Title: "Win Percentange(%)",
+      yAxisTitle: "Percentage",
       xAxisLabels: [],
       chartTitle: "The Effect of Foreign-born Team Percentage on Winning",
 
@@ -130,14 +129,29 @@ export default {
           data: [],
           label: "",
           borderColor: "#1976D2",
-          fill: true,
+          fill: false,
+          fill: {
+            target: "1",
+
+          }
         },
         {
           data: [],
           label: "",
           borderColor: "#26A69A",
-          fill: true,
+          fill: {
+            target: "2",
+            above: "#26A69A",
+            below: "#9C27B0",
+          }
         },
+        {
+          data: [],
+          label: "",
+          borderColor: "#1D1D1D",
+          fill: false,
+          pointRadius: 0,
+        }
       ],
       progress: false,
       year_range: {
@@ -170,8 +184,9 @@ export default {
     },
 
     updateTeamLabels() {
-      this.dataSets[0].label = this.team.value + " Win %";
-      this.dataSets[1].label = this.team.value + " Foreign-born %";
+      this.dataSets[0].label = this.team.value + " Foreign-born %";
+      this.dataSets[1].label = this.team.value + " Win %";
+      this.dataSets[2].label = "All Teams Win %";
     },
 
     async setTeamsInRange() {
@@ -204,6 +219,7 @@ export default {
 
       this.dataSets[0].data = data.map((item) => item[1]);
       this.dataSets[1].data = data.map((item) => item[2]);
+      this.dataSets[2].data = data.map((item) => item[3]);
 
       this.progress = false;
       this.showPlaceHolder = false;
