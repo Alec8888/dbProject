@@ -1,7 +1,8 @@
 <template>
   <q-page padding>
     <div class="q-gutter-md">
-      <q-card>
+
+      <!-- <q-card>
         <q-card-section>
           <div class="text-h6">
             Exploring the Impact of Salaries on Performance
@@ -40,31 +41,35 @@
             performance.
           </div>
         </q-card-section>
-      </q-card>
+      </q-card> -->
+
       <q-card>
         <q-card-section>
           <div class="text-h6">
             Select a range of seasons and click the run visualization button.
           </div>
         </q-card-section>
+
         <q-card-section>
           <q-range
             name="year_range"
             v-model="year_range"
+            label-always
+            color="primary"
+            :markers="false"
             :min="1871"
             :max="2022"
             :step="1"
-            label-always
-            color="primary"
-            :markers="true"
+            :drag-range="false"
           />
         </q-card-section>
+
         <q-card-section>
           <q-btn
             class="glossy"
             :loading="progress"
             color="accent"
-            @click="runQuery1"
+            @click="runQuery"
             label="Run Visualization"
           >
             <template v-slot:loading>
@@ -81,7 +86,17 @@
           />
         </q-card-section>
       </q-card>
+
+
       <q-card>
+        <q-linear-progress
+          v-if="showLoading"
+          indeterminate
+          rounded
+          size="20px"
+          color="secondary"
+        />
+
         <q-img
           v-if="showPlaceholder"
           fit="fill"
@@ -89,18 +104,14 @@
           class="query-img-card"
         />
 
-        <q-card-section v-if="showVisualization">
-          <div>
-            <!--this list is for the demo sql query-->
-            <q-list bordered separator>
-              <q-item v-for="item in dataFromOracle" :key="item.id">
-                <q-item-section>{{ item[0] }}</q-item-section>
-                <q-item-section>{{ item[1] }}</q-item-section>
-                <q-item-section>{{ item[2] }}</q-item-section>
-              </q-item>
-            </q-list>
-          </div>
-        </q-card-section>
+        <chartCard
+          v-if="showVisualization"
+          :chartTitle="chartTitle"
+          :labels_xaxis="xlabels"
+          :dataSets="dataSets"
+          :yaxisTitle="yAxisTitle"
+          :line-tension="smoothCurve"
+        ></chartCard>
       </q-card>
 
       <div class="q-gutter-md flex justify-center q-mr-lg">
@@ -126,41 +137,80 @@
 </template>
 
 <script>
+import chartCard from "../components/chartCard.vue";
 export default {
+  components: {
+    chartCard,
+  },
   data() {
     return {
-      current: 1,
-      dataFromOracle: [],
-      cityName: "Tampa",
-      country: "USA",
-      progress: false,
       year_range: {
         min: 1871,
         max: 2022,
       },
+      dataFromOracle: [],
+      progress: false,
       showPlaceholder: true,
       showVisualization: false,
+      showLoading: false,
+      chartTitle: "Runs-to-Outs Ratio by Salary Range",
+      yAxisTitle: "Runs-to-Outs Ratio",
+      xlabels: [],
+      smoothCurve: 0.5,
+
+      dataSets: [
+        {
+          data: [],
+          label: "High Salary",
+          borderColor: "#FFA000",
+          fill: false,
+        },
+        {
+          data: [],
+          label: "Medium Salary",
+          borderColor: "#1976D2",
+          fill: false,
+        },
+        {
+          data: [],
+          label: "Low Salary",
+          borderColor: "#FF0000",
+          fill: false,
+        }
+      ]
+
     };
   },
   methods: {
-    async runQuery1() {
+    async runQuery() {
+      this.showPlaceholder = false;
+      this.showVisualization = false;
+      this.showLoading = true;
       this.progress = true;
+
       let response = await fetch(
-        `http://localhost:4000/api?name_from_client=${this.cityName}&country_from_client=${this.country}`
+        `http://localhost:4000/q1?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
       );
       let data = await response.json();
       this.dataFromOracle = data;
       console.log(data);
+
+      this.xlabels = data.map((item) => item[0]);
+      this.dataSets[0].data = data.map((item) => item[1]);
+      this.dataSets[1].data = data.map((item) => item[2]);
+      this.dataSets[2].data = data.map((item) => item[3]);
+
+
       this.progress = false;
-      this.showPlaceholder = false;
+      this.showLoading = false;
       this.showVisualization = true;
     },
     reset() {
       this.dataFromOracle = [];
-      this.showPlaceholder = true;
       this.showVisualization = false;
       this.year_range.min = 1871;
       this.year_range.max = 2022;
+      this.dataSets.forEach((dataset) => (dataset.data = []));
     },
   },
 };

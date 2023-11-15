@@ -207,6 +207,36 @@ async function runQuery5(start, end) {
   return result.rows;
 }
 
+async function runQuery1(start, end) {
+  let connection;
+  let result;
+  try {
+    connection = await oracledb.getConnection(connectionConfig);
+    console.log("Successfully connected to Oracle!");
+
+    let sql;
+    try {
+      sql = fs.readFileSync("../Queries/query1.sql").toString();
+    } catch (err) {
+      console.error('Error reading SQL file', err);
+    }
+
+    result = await connection.execute(sql, { startYear: start, endYear: end });
+    console.log(result.rows);
+  } catch (err) {
+    console.error("Error connecting to the database", err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the database connection", err);
+      }
+    }
+  }
+  return result.rows;
+}
+
 app.use(express.static("../spa/"));
 const server = app.listen(4000, () => {
   console.log("server started at localhost:4000");
@@ -247,5 +277,10 @@ app.get("/q5", async (req, res) => {
 
 app.get("/q2/teams_in_range", async (req, res) => {
   const rows = await getTeamsInRange(req.query.startYear, req.query.endYear);
+  res.send(rows);
+});
+
+app.get("/q1", async (req, res) => {
+  const rows = await runQuery1(req.query.startYear, req.query.endYear);
   res.send(rows);
 });
