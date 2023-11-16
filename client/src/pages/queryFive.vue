@@ -122,11 +122,19 @@ export default {
   },
   data() {
     return {
+      year_range: {
+        min: 1871,
+        max: 2022,
+      },
+      progress: false,
+      showVisualization: false,
+      showPlaceHolder: true,
+      showLoading: false,
+
       smoothCurve: 0.5,
       yaxisTitle: "% of top 5% regular season HR hitters in Postseason",
       xlabels: [],
       chartTitle: "Percentage of top 5% HR hitters that reached Postseason",
-
       dataSets: [
         {
           data: [],
@@ -144,14 +152,6 @@ export default {
         },
       ],
       dataFromOracle: [],
-      progress: false,
-      year_range: {
-        min: 1871,
-        max: 2022,
-      },
-      showVisualization: false,
-      showPlaceHolder: true,
-      showLoading: false,
     };
   },
   mounted() {},
