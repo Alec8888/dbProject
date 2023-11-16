@@ -94,7 +94,7 @@
           size="lg"
           color="primary"
           icon="navigate_before"
-          to="/queryOne"
+          to="/queryTwo"
         />
         <q-btn
           class="glossy"
@@ -102,7 +102,7 @@
           size="lg"
           color="accent"
           icon-right="navigate_next"
-          to="queryThree"
+          to="queryFour"
         />
       </div>
     </div>

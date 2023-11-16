@@ -207,7 +207,7 @@ async function runQuery5(start, end) {
   return result.rows;
 }
 
-async function runQuery4(start, end) {
+async function runQuery4obp(start, end) {
   let connection;
   let result;
   try {
@@ -216,9 +216,67 @@ async function runQuery4(start, end) {
 
     let sql;
     try {
-      sql = fs.readFileSync("../Queries/query4.sql").toString();
+      sql = fs.readFileSync("../Queries/query4obp.sql").toString();
     } catch (err) {
-      console.error('Error reading ../Queries/query4.sql file', err);
+      console.error('Error reading SQL file', err);
+    }
+
+    result = await connection.execute(sql, { startYear: start, endYear: end });
+    console.log(result.rows);
+  } catch (err) {
+    console.error("Error connecting to the database", err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the database connection", err);
+      }
+    }
+  }
+  return result.rows;
+}
+async function runQuery4obpa(start, end) {
+  let connection;
+  let result;
+  try {
+    connection = await oracledb.getConnection(connectionConfig);
+    console.log("Successfully connected to Oracle!");
+
+    let sql;
+    try {
+      sql = fs.readFileSync("../Queries/query4obpa.sql").toString();
+    } catch (err) {
+      console.error('Error reading SQL file', err);
+    }
+
+    result = await connection.execute(sql, { startYear: start, endYear: end });
+    console.log(result.rows);
+  } catch (err) {
+    console.error("Error connecting to the database", err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the database connection", err);
+      }
+    }
+  }
+  return result.rows;
+}
+async function runQuery4rf(start, end) {
+  let connection;
+  let result;
+  try {
+    connection = await oracledb.getConnection(connectionConfig);
+    console.log("Successfully connected to Oracle!");
+
+    let sql;
+    try {
+      sql = fs.readFileSync("../Queries/query4rf.sql").toString();
+    } catch (err) {
+      console.error('Error reading SQL file', err);
     }
 
     result = await connection.execute(sql, { startYear: start, endYear: end });
@@ -315,7 +373,15 @@ app.get("/q1", async (req, res) => {
   res.send(rows);
 });
 
-app.get("/q4", async (req, res) => {
-  const rows = await runQuery4(req.query.startYear, req.query.endYear);
+app.get("/q4/obp", async (req, res) => {
+  const rows = await runQuery4obp(req.query.startYear, req.query.endYear);
+  res.send(rows);
+});
+app.get("/q4/obpa", async (req, res) => {
+  const rows = await runQuery4obpa(req.query.startYear, req.query.endYear);
+  res.send(rows);
+});
+app.get("/q4/rf", async (req, res) => {
+  const rows = await runQuery4rf(req.query.startYear, req.query.endYear);
   res.send(rows);
 });

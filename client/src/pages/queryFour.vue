@@ -170,7 +170,7 @@ export default {
       ],
 
       smoothCurve: 0.5,
-      yaxisTitle: "Performance Metric",
+      yaxisTitle: "test",
       xlabels: [],
       chartTitle: "Player Performance Metric by Year",
       dataSets: [
@@ -223,32 +223,50 @@ export default {
   },
   methods: {
     async runQuery() {
-      this.showPlaceholder = false;
-      this.showVisualization = false;
-      this.showLoading = true;
-      console.log(this.year_range.min, this.year_range.max);
+      try {
+        this.showPlaceholder = false;
+        this.showVisualization = false;
+        this.showLoading = true;
+        console.log(this.year_range.min, this.year_range.max);
 
-      this.progress = true;
+        this.progress = true;
 
-      let response = await fetch(
-        `http://localhost:4000/q4?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
-      );
-      let data = await response.json();
-      this.dataFromOracle = data;
+        console.log(this.metric);
+        let response;
+        if (this.metric == "OBP") {
+          response = await fetch(`http://localhost:4000/q4/obp?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
+          this.yaxisTitle = "On Base Percentage";
+        }
+        else if (this.metric == "RF") {
+          response = await fetch(`http://localhost:4000/q4/rf?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
+          this.yaxisTitle = "Range Factor";
+        }
+        else if (this.metric == "OBPA") {
+          response = await fetch(`http://localhost:4000/q4/obpa?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
+          this.yaxisTitle = "On Base Percentage Against";
+        }
 
-      console.log(data);
+        let data = await response.json();
+        this.dataFromOracle = data;
 
-      this.xlabels = data.map((item) => item[0]);
-      this.dataSets[0].data = data.map((item) => item[1]);
-      this.dataSets[1].data = data.map((item) => item[2]);
-      this.dataSets[2].data = data.map((item) => item[3]);
-      this.dataSets[3].data = data.map((item) => item[4]);
-      this.dataSets[4].data = data.map((item) => item[5]);
-      this.dataSets[5].data = data.map((item) => item[6]);
+        console.log(data);
 
-      this.progress = false;
-      this.showLoading = false;
-      this.showVisualization = true;
+        this.xlabels = data.map((item) => item[0]);
+        this.dataSets[0].data = data.map((item) => item[1]);
+        this.dataSets[1].data = data.map((item) => item[2]);
+        this.dataSets[2].data = data.map((item) => item[3]);
+        this.dataSets[3].data = data.map((item) => item[4]);
+        this.dataSets[4].data = data.map((item) => item[5]);
+        this.dataSets[5].data = data.map((item) => item[6]);
+
+        this.progress = false;
+        this.showLoading = false;
+        this.showVisualization = true;
+      } catch (error) {
+        console.error(error);
+        this.showLoading = false;
+        this.progress = false;
+      }
     },
     reset() {
       this.dataFromOracle = [];
