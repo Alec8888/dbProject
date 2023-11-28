@@ -92,12 +92,32 @@
           {{ q5_description }}
         </q-card-section>
       </q-card>
+
+      <q-card class="queryCards">
+        <q-img src="~/assets/howMany2.png" class="query-img-card">
+          <div class="absolute-full transparent">
+            <q-list class="absolute-full transparent">
+              <q-item to="queryFive" class="absolute-full transparent"></q-item>
+            </q-list>
+          </div>
+
+        </q-img>
+
+        <q-card-section>
+          Click the button to run a query that counts of all tuples in this website's database.
+        </q-card-section>
+        <q-card-actions class="flex-center q-gutter-md">
+          <q-btn class="glossy" icon-right="arrow_right_alt" color="accent" label="Show Count" @click="countTuples" />
+          <div class="text-h6">{{ tuple_count }}</div>
+        </q-card-actions>
+      </q-card>
+
     </div>
 
-    <div class=" row justify-center">
+    <div class="row justify-center">
       <q-btn class="glossy q-my-sm" color="accent" label="Start Here" to="queryOne"/>
-
     </div>
+
   </q-page>
 </template>
 
@@ -118,11 +138,22 @@ export default defineComponent({
         q4_description: 'The influence of player height on performance, which addresses questions about whether taller or shorter players have advantages in specific aspects of the game',
         q5_title: 'Home Runs and Post season',
         q5_description: 'The effect homeruns have on the chances of a player appearing in the postseason, which explores whether prolific home run hitters are likely to impact their team’s chances of making it to the postseason.',
+
+        tuple_count: '?'
       }
   }
   ,
   methods: {
-    
+    async countTuples () {
+      console.log('counting tuples')
+      let response = await fetch(
+        `http://localhost:4000/count`
+      );
+      let data = await response.json();
+      this.tuple_count = data[0][0].toLocaleString();
+      console.log(data);
+      console.log(data[0]);
+    }
   }
 })
 </script>

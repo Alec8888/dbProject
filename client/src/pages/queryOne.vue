@@ -87,7 +87,6 @@
         </q-card-section>
       </q-card>
 
-
       <q-card>
         <q-linear-progress
           v-if="showLoading"
@@ -119,7 +118,7 @@
           class="glossy"
           rounded
           size="lg"
-          color="primary"
+          color="accent"
           icon="home"
           to="/"
         />

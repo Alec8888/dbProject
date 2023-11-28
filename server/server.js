@@ -325,6 +325,36 @@ async function runQuery1(start, end) {
   return result.rows;
 }
 
+async function countTuples() {
+  let connection;
+  let result;
+  try {
+    connection = await oracledb.getConnection(connectionConfig);
+    console.log("Successfully connected to Oracle!");
+
+    let sql;
+    try {
+      sql = fs.readFileSync("../Queries/count.sql").toString();
+    } catch (err) {
+      console.error('Error reading SQL file', err);
+    }
+
+    result = await connection.execute(sql);
+    console.log(result.rows);
+  } catch (err) {
+    console.error("Error connecting to the database", err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the database connection", err);
+      }
+    }
+  }
+  return result.rows;
+}
+
 app.use(express.static("../spa/"));
 const server = app.listen(4000, () => {
   console.log("server started at localhost:4000");
@@ -383,5 +413,10 @@ app.get("/q4/obpa", async (req, res) => {
 });
 app.get("/q4/rf", async (req, res) => {
   const rows = await runQuery4rf(req.query.startYear, req.query.endYear);
+  res.send(rows);
+});
+
+app.get("/count", async (req, res) => {
+  const rows = await countTuples();
   res.send(rows);
 });

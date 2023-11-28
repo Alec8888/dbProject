@@ -87,7 +87,7 @@
           size="lg"
           class="glossy"
           rounded
-          color="primary"
+          color="accent"
           icon="home"
           to="/"
         />
@@ -95,7 +95,7 @@
           class="glossy"
           rounded
           size="lg"
-          color="primary"
+          color="accent"
           icon="navigate_before"
           to="/queryOne"
         />
