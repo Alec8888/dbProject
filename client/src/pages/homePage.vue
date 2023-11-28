@@ -107,7 +107,7 @@
           Click the button to run a query that counts of all tuples in this website's database.
         </q-card-section>
         <q-card-actions class="flex-center q-gutter-md">
-          <q-btn class="glossy" icon-right="arrow_right_alt" color="accent" label="Show Count" @click="countTuples" />
+          <q-btn class="glossy" icon-right="arrow_right_alt" color="accent" label="Get Count" @click="countTuples" />
           <div class="text-h6">{{ tuple_count }}</div>
         </q-card-actions>
       </q-card>
