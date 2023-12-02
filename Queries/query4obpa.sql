@@ -1,11 +1,11 @@
 WITH 
     PERCENTILES AS (
         SELECT 
-            PERCENTILE_CONT(0.05) WITHIN GROUP (ORDER BY height ASC) AS "05PERCENTILE",
-            PERCENTILE_CONT(0.15) WITHIN GROUP (ORDER BY height ASC) AS "15PERCENTILE",
+            PERCENTILE_CONT(0.08) WITHIN GROUP (ORDER BY height ASC) AS "05PERCENTILE",
+            PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY height ASC) AS "15PERCENTILE",
             PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY height ASC) AS "50PERCENTILE",
-            PERCENTILE_CONT(0.85) WITHIN GROUP (ORDER BY height ASC) AS "85PERCENTILE",
-            PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY height ASC) AS "95PERCENTILE"
+            PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY height ASC) AS "85PERCENTILE",
+            PERCENTILE_CONT(0.92) WITHIN GROUP (ORDER BY height ASC) AS "95PERCENTILE"
         FROM 
             player
     ),
@@ -40,12 +40,12 @@ WITH
     )
 SELECT 
     year,
-    ROUND(AVG(CASE WHEN height_group = '-3Deviation' THEN OBP_Against END), 2) AS "-3_Deviation_OBP_Against",
-    ROUND(AVG(CASE WHEN height_group = '-2Deviation' THEN OBP_Against END), 2) AS "-2_Deviation_OBP_Against",
-    ROUND(AVG(CASE WHEN height_group = '-1Deviation' THEN OBP_Against END), 2) AS "-1_Deviation_OBP_Against",
-    ROUND(AVG(CASE WHEN height_group = '+1Deviation' THEN OBP_Against END), 2) AS "+1_Deviation_OBP_Against",
-    ROUND(AVG(CASE WHEN height_group = '+2Deviation' THEN OBP_Against END), 2) AS "+2_Deviation_OBP_Against",
-    ROUND(AVG(CASE WHEN height_group = '+3Deviation' THEN OBP_Against END), 2) AS "+3_Deviation_OBP_Against"
+    ROUND(AVG(CASE WHEN height_group = '-3Deviation' THEN OBP_Against END) * .1, 3) AS "-3_Deviation_OBP_Against",
+    ROUND(AVG(CASE WHEN height_group = '-2Deviation' THEN OBP_Against END)* .1, 3) AS "-2_Deviation_OBP_Against",
+    ROUND(AVG(CASE WHEN height_group = '-1Deviation' THEN OBP_Against END)* .1, 3) AS "-1_Deviation_OBP_Against",
+    ROUND(AVG(CASE WHEN height_group = '+1Deviation' THEN OBP_Against END)* .1, 3) AS "+1_Deviation_OBP_Against",
+    ROUND(AVG(CASE WHEN height_group = '+2Deviation' THEN OBP_Against END)* .1, 3) AS "+2_Deviation_OBP_Against",
+    ROUND(AVG(CASE WHEN height_group = '+3Deviation' THEN OBP_Against END)* .1, 3) AS "+3_Deviation_OBP_Against"
 FROM OBPA_stats_by_height
 GROUP BY year
 ORDER BY year
