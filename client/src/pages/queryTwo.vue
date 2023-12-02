@@ -72,6 +72,9 @@
           :lineTension="smoothCurve"
           :dataSets="dataSets"
           :yaxisTitle="yaxisTitle"
+          :yAxisTitle2="yaxisTitle2"
+          :yAxisDisplay="true"
+          
         ></chartCard>
 
         <q-img
@@ -124,6 +127,8 @@ export default {
       smoothCurve: 0.5,
       fill1: false,
       yaxisTitle: "Salary per Win",
+      yaxisTitle2: "Wins",
+
       xlabels: [],
       chartTitle: "Team Salary per Win",
 
@@ -135,18 +140,40 @@ export default {
           pointRadius: 0,
           fill: {
             target: "1",
-            above: "#C10015",
-            below: "#21BA45",
+            above: "#c1001757",
+            below: "#21ba4575",
           }
 
         },
         {
           data: [],
-          label: "",
+          label: "All Teams",
           borderColor: "#1976D2",
           pointRadius: 0,
           fill: false,
-        }
+        },
+        {
+          data: [],
+          yAxisID: 'y1',
+          label: "Team wins",
+          borderColor: "#31CCEC",
+          pointRadius: 0,
+          fill: {
+            target: "3",
+            above: "#21ba4575",
+            below: "#c1001757",
+          },
+          borderDash: [5, 5],
+        },
+        // all teams avg wins
+        {
+          data: [],
+          yAxisID: 'y1',
+          label: "All Teams Wins",
+          borderColor: "#1976D2",
+          pointRadius: 0,
+          fill: false,
+        },
       ],
 
       dataFromOracle: [],
@@ -168,7 +195,6 @@ export default {
         label: "",
         value: "",
       },
-      current: 2,
       team2: "",
     };
   },
@@ -182,7 +208,7 @@ export default {
       console.log(this.team);
       console.log(this.team2);
     },
-    updateTeamLabels() {
+    updateTeamLabels() { // if we want to add a second team, we can use this function to update the labels
       for (let i = 1; i <= this.dataSets.length; i++) {
         this.dataSets[i - 1].label = this.team.value;
       }
@@ -209,7 +235,8 @@ export default {
 
       // this.updateTeamLabels();
       this.dataSets[0].label = this.team.value;
-      this.dataSets[1].label = 'All Teams'
+      //this.dataSets[2].label = this.team.value + " Wins";
+  
 
       this.progress = true;
 
@@ -224,8 +251,26 @@ export default {
       // add a dataset for each column (team), except the first (year)
       for (let i = 1; i <= this.dataSets.length; i++) {
         this.dataSets[i - 1].data = data.map((item) => item[i]);
-      }
 
+      }
+      
+      // this.dataSets = this.dataSets.map(dataset => {
+      //   if (dataset.label === 'Team wins' || dataset.label === 'All Teams Wins') {
+      //     return {
+      //       ...dataset,
+      //       yAxisID: 'y1',
+      //     };
+      //   }
+      //   return dataset;
+      // });
+
+
+
+      // this.dataSets[2].yAxisID = 'y1';
+      // this.dataSets[3].yAxisID = 'y1';
+      // this.dataSets[0].yAxisID = 'y1';
+      // this.dataSets[1].yAxisID = 'y1';
+      
       this.progress = false;
       this.showPlaceHolder = false;
       this.showLoading = false;

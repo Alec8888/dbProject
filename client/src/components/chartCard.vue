@@ -46,6 +46,7 @@ export default {
             borderColor: dataSet.borderColor,
             backgroundColor: dataSet.backgroundColor,
             pointRadius: dataSet.pointRadius,
+            yAxisID: dataSet.label === 'Team wins' || dataSet.label === 'All Teams Wins' ? 'y1' : undefined,
           })),
         },
         options: {
@@ -77,15 +78,18 @@ export default {
             },
             ...(this.yAxisTitle2 ? {
               y1: {
-                display: this.yAxisDisplay,
+                id: 'y1',
+                display: true,
                 position: 'right',
                 title: {
                   display: true,
                   text: this.yAxisTitle2
                 },
-                ticks: {
-                  
-                }
+                min: 0,
+                
+                grid: {
+                  drawOnChartArea: false, // only want the grid lines for one axis to show up
+                },
               }
             } : {})
           },
