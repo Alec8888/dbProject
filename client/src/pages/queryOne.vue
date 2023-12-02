@@ -57,7 +57,7 @@
             label-always
             color="primary"
             :markers="false"
-            :min="1871"
+            :min="1985"
             :max="2022"
             :step="1"
             :drag-range="false"

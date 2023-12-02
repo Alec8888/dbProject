@@ -15,7 +15,7 @@
             label-always
             color="primary"
             :markers="false"
-            :min="1871"
+            :min="1903"
             :max="2022"
             :step="1"
             :drag-range="false"
@@ -123,7 +123,7 @@ export default {
   data() {
     return {
       year_range: {
-        min: 1871,
+        min: 1903, // first year of World Series
         max: 2022,
       },
       progress: false,

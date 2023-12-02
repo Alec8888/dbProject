@@ -34,7 +34,7 @@
             label-always
             color="primary"
             :markers="false"
-            :min="1871"
+            :min="1934"
             :max="2022"
             :step="1"
             :drag-range="false"
@@ -234,14 +234,26 @@ export default {
         console.log(this.metric);
         let response;
         if (this.metric == "OBP") {
+          if (this.year_range.min < 1955) {
+            this.year_range.min = 1955;
+          }
+
           response = await fetch(`http://localhost:4000/q4/obp?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
           this.yaxisTitle = "On Base Percentage";
         }
         else if (this.metric == "RF") {
+          if (this.year_range.min < 1934) {
+            this.year_range.min = 1934;
+          }
+
           response = await fetch(`http://localhost:4000/q4/rf?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
           this.yaxisTitle = "Range Factor";
         }
         else if (this.metric == "OBPA") {
+          if (this.year_range.min < 1970) {
+            this.year_range.min = 1970;
+          }
+
           response = await fetch(`http://localhost:4000/q4/obpa?startYear=${this.year_range.min}&endYear=${this.year_range.max}`);
           this.yaxisTitle = "On Base Percentage Against";
         }

@@ -97,7 +97,7 @@
         <q-img src="~/assets/howMany2.png" class="query-img-card">
           <div class="absolute-full transparent">
             <q-list class="absolute-full transparent">
-              <q-item to="queryFive" class="absolute-full transparent"></q-item>
+              <q-item @click="countTuples" clickable class="absolute-full transparent"></q-item>
             </q-list>
           </div>
 
