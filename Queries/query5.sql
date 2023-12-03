@@ -1,7 +1,7 @@
 WITH HR_Percentiles AS (
     SELECT
         year,
-        FLOOR(PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY HR)) AS HR_95thPercentile
+        FLOOR(PERCENTILE_CONT(:percentile) WITHIN GROUP (ORDER BY HR)) AS HR_95thPercentile
     FROM battingseason
     WHERE 
         year >= :startYear AND

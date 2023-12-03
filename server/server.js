@@ -184,14 +184,14 @@ app.post("/feedback", async (req, res) => {
   res.send("Feedback received");
 });
 
-async function runQuery5(start, end) {
+async function runQuery5(percentile, start, end) {
   let connection;
   let result;
   try {
     connection = await oracledb.getConnection(connectionConfig);
     console.log("Successfully connected to Oracle!");
     const sql = fs.readFileSync("../Queries/query5.sql").toString();
-    result = await connection.execute(sql, { startYear: start, endYear: end });
+    result = await connection.execute(sql, { percentile: percentile, startYear: start, endYear: end });
     console.log(result.rows);
   } catch (err) {
     console.error("Error connecting to the database", err);
@@ -389,7 +389,7 @@ app.get("/q2", async (req, res) => {
 });
 
 app.get("/q5", async (req, res) => {
-  const rows = await runQuery5(req.query.startYear, req.query.endYear);
+  const rows = await runQuery5(req.query.percentile, req.query.startYear, req.query.endYear);
   res.send(rows);
 });
 

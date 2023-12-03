@@ -2,26 +2,36 @@
   <q-page padding>
     <div class="q-gutter-md">
       <q-card>
-        <q-card-section>
-          <div class="text-h6">
-            Select a range of seasons and click the run visualization button.
-          </div>
-        </q-card-section>
 
         <q-card-section>
-          <q-range
-            name="year_range"
-            v-model="year_range"
-            label-always
+          <q-knob
+
+            :min="0"
+            :max="100"
+            :inner-min="50"
+            :inner-max="97"
+            v-model="percentile"
+            show-value
+            size="90px"
+            :thickness="0.22"
             color="primary"
-            :markers="false"
-            :min="1903"
-            :max="2022"
-            :step="1"
-            :drag-range="false"
+            track-color="grey-3"
+            class="q-ma-md"
+          >{{ percentile }}%
+          </q-knob>
+          <q-range
+          name="year_range"
+          v-model="year_range"
+          label-always
+          color="primary"
+          :markers="false"
+          :min="1871"
+          :max="2022"
+          :step="1"
+          :drag-range="false"
           />
         </q-card-section>
-
+        
         <q-card-section>
           <q-btn
             class="glossy"
@@ -73,13 +83,60 @@
 
       <q-card>
         <q-card-section>
-          <div class="text-h6">Note:</div>
-          <div class="text-body1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt,
-            praesentium sequi? Perferendis nam fugit, obcaecati incidunt laborum
-            harum sequi cumque doloremque ea, rem facere. Necessitatibus
-            blanditiis adipisci dolor quibusdam sed!
-          </div>
+          <q-list dense bordered class="rounded-borders">
+            <q-item clickable v-ripple>
+              <q-item-section>
+                1903: World series started
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-ripple>
+              <q-item-section>
+                1904: No World Series due to a dispute between the National League and the American League.
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-ripple>
+              <q-item-section>
+                1969: Increased number of teams in postseason due to league expansion and the introduction of the League Championship Series. 
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-ripple>
+              <q-item-section>
+                1994: No World Series due to a player strike.
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-ripple>
+              <q-item-section>
+                1995: Increased number of teams in postseason due to introduction of the Wild Card and the Division Series.
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-ripple>
+              <q-item-section>
+                1981: Increased number of teams in postseason due to players strike.
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-ripple>
+              <q-item-section>
+                2020: Increased number of teams in postseason due to COVID-19.
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-card-section>
+      </q-card>
+
+      <q-card>
+        <q-card-section>
+          <q-list dense bordered class="rounded-borders">
+            <q-item clickable v-ripple>
+              <q-item-section>
+                Being a top home run hitter generally correlates with a higher likelihood of appearing in the postseason.
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-ripple>
+              <q-item-section>
+                Adjusting the percentile shows that it doesn't take much more than the average number of home runs to see increase postseason appearances.
+              </q-item-section>
+            </q-item>
+          </q-list>
         </q-card-section>
       </q-card>
 
@@ -126,15 +183,16 @@ export default {
         min: 1903, // first year of World Series
         max: 2022,
       },
+      percentile: 95.0,
       progress: false,
       showVisualization: false,
       showPlaceHolder: true,
       showLoading: false,
 
       smoothCurve: 0.5,
-      yaxisTitle: "% of top 5% regular season HR hitters in Postseason",
+      yaxisTitle: "% hitters in Postseason",
       xlabels: [],
-      chartTitle: "Percentage of top 5% HR hitters that reached Postseason",
+      chartTitle: "Do players who hit the most HRs appear in the Postseason?",
       dataSets: [
         {
           data: [],
@@ -163,29 +221,46 @@ export default {
       console.log(this.year_range.min, this.year_range.max);
 
       this.progress = true;
+      
+      console.log("percentile: " + this.percentile);
+      let percent_formatted = this.percentile.toFixed(2);
+      percent_formatted *= 0.01;
+      console.log("percent_formatted: " + percent_formatted);
+      try {
+        let response = await fetch(
+          // `http://localhost:4000/q5?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
+          // `http://localhost:4000/q5?startYear=${this.percentile}&endYear=${this.year_range.min}&percentile=${this.year_range.max}`
+          `http://localhost:4000/q5?percentile=${percent_formatted}&startYear=${this.year_range.min}&endYear=${this.year_range.max}`
+        );
+        let data = await response.json();
+        this.dataFromOracle = data;
+  
+        console.log(data);
+  
+        this.xlabels = data.map((item) => item[0]);
+        this.dataSets[0].data = data.map((item) => item[1]);
+        this.dataSets[1].data = data.map((item) => item[2]);
+  
+        this.progress = false;
+        this.showLoading = false;
+        this.showVisualization = true;
 
-      let response = await fetch(
-        `http://localhost:4000/q5?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
-      );
-      let data = await response.json();
-      this.dataFromOracle = data;
-
-      console.log(data);
-
-      this.xlabels = data.map((item) => item[0]);
-      this.dataSets[0].data = data.map((item) => item[1]);
-      this.dataSets[1].data = data.map((item) => item[2]);
-
-      this.progress = false;
-      this.showLoading = false;
-      this.showVisualization = true;
+      }
+      catch (error) {
+        console.log(error);
+        this.progress = false;
+        this.showLoading = false;
+        this.showVisualization = false;
+        this.showPlaceHolder = true;
+      }
     },
     reset() {
       this.dataFromOracle = [];
       this.showVisualization = false;
-      this.year_range.min = 1871;
+      this.year_range.min = 1903;
       this.year_range.max = 2022;
       this.dataSets.forEach((dataset) => (dataset.data = []));
+      this.percentile = 95;
     },
   },
 };
