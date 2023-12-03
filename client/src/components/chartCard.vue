@@ -52,7 +52,7 @@ export default {
         options: {
           responsive: true,
           animation: {
-            duration: 2000,
+            duration: 1000,
             easing: 'linear',
           },
           interaction: {
