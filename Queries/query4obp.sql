@@ -7,14 +7,14 @@ WITH
             PERCENTILE_CONT(0.85) WITHIN GROUP (ORDER BY height ASC) AS "85PERCENTILE",
             PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY height ASC) AS "95PERCENTILE"
         FROM 
-            "JOSEPH.BARRON".player
+            player
     ),
     OBP_within_years AS (
         SELECT 
             bs.player_id,
             bs.year,
             (bs.h + bs.hbp + bs.bb) / (bs.ab + bs.hbp + bs.bb + bs.sf) AS OBP
-        FROM "JOSEPH.BARRON".BattingSeason bs
+        FROM BattingSeason bs
         WHERE 
             year >= :startYear AND
             year <= :endYear AND
@@ -34,7 +34,7 @@ WITH
                 WHEN p.height <= PERCENTILES."95PERCENTILE" AND p.height > PERCENTILES."85PERCENTILE" THEN '+2Deviation'
                 WHEN p.height > PERCENTILES."95PERCENTILE" THEN '+3Deviation'
             END AS height_group
-        FROM "JOSEPH.BARRON".player p
+        FROM player p
         JOIN OBP_within_years ON OBP_within_years.player_id = p.player_id,
         PERCENTILES
     )

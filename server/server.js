@@ -10,7 +10,7 @@ const oracledb = require("oracledb");
 let connectionConfig = {
   user: dbUser,
   password: dbPassword,
-  connectString: "oracle.cise.ufl.edu:1521/orcl",
+  connectString: "zdj600tnhwtzcucl_high",
 };
 
 // EXPRESS
@@ -37,6 +37,33 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+async function testDB() {
+  console.log("Testing DB connection...");
+  oracledb.initOracleClient({ libDir: "C:\\oracle\\instantclient_21_12" });
+  let connection;
+  let result;
+  try {
+    connection = await oracledb.getConnection(connectionConfig);
+    result = await connection.execute("SELECT COUNT(*) FROM player");
+    console.log("Successfully connected to Oracle!");
+
+  } catch (err) {
+    console.error("Error connecting to the database", err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+        console.log("Successfully closed connection");
+      } catch (err) {
+        console.error("Error closing the database connection", err);
+      }
+    }
+  }
+}
+
+const debug = false;
+if (debug) {testDB()};
 
 const fs = require("fs");
 
@@ -69,7 +96,6 @@ async function runQuery1(start, end) {
   }
   return result.rows;
 };
-
 
 async function getTeamsInRange(start, end) {
   let connection;
