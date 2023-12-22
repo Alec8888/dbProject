@@ -1,8 +1,8 @@
 {
   "name": "dataproject",
   "version": "0.0.1",
-  "description": "A data base web application.",
-  "productName": "dbProject",
+  "description": "Focused on the visualization of oracle database queries.",
+  "productName": "Baseball Data Project",
   "author": "Alec Patterson",
   "private": true,
   "scripts": {
