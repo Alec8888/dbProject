@@ -360,7 +360,7 @@ async function countTuples() {
   return result.rows;
 }
 
-app.use(express.static("../spa/"));
+app.use(express.static("../client/spa/"));
 const server = app.listen(3000, '0.0.0.0', () => {
   console.log("server started at localhost:3000");
 });
