@@ -191,7 +191,7 @@ export default {
       this.progress = true;
 
       let response = await fetch(
-        `http://localhost:4000/q1?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
+        `http://localhost:3000/q1?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
       );
       let data = await response.json();
       this.dataFromOracle = data;
