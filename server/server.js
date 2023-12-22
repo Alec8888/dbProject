@@ -47,6 +47,7 @@ async function testDB() {
     connection = await oracledb.getConnection(connectionConfig);
     result = await connection.execute("SELECT COUNT(*) FROM player");
     console.log("Successfully connected to Oracle!");
+    console.log(result.rows);
 
   } catch (err) {
     console.error("Error connecting to the database", err);
