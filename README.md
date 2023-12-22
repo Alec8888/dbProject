@@ -1,23 +1,5 @@
-# Contributer Guide
 
-
-### Contributors
-- Joseph Barron
-- Christian Carey
-- Quan Nguyen
-- Alec Patterson
-
-### What this app does
-...
-
-
-### Front End
-...
-
-### Back End
-...
-
-### ORacle deployment
+### Oracle deployment
 Set up db
 
 start instance
@@ -45,6 +27,14 @@ install dependencies
 
 install oralce instance client  
 `sudo yum install oracle-instantclient-basiclite-21.12.0.0.0-1.el8.x86_64.rpm`
+
+[Install PM2 Process manager](https://pm2.keymetrics.io/docs/usage/quick-start/)
+
+Start app from oracle isntance
+`pm2 start app.js`
+
+
+
 
 ???
 
