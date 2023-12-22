@@ -361,7 +361,7 @@ async function countTuples() {
 }
 
 app.use(express.static("../spa/"));
-const server = app.listen(3000, () => {
+const server = app.listen(3000, '0.0.0.0', () => {
   console.log("server started at localhost:3000");
 });
 
