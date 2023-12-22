@@ -14,7 +14,6 @@
         <q-card-section>
 
           <q-form
-            action="http://localhost:8000/#/api"
             method="post"
             @submit="onSubmit"
             @reset="onReset"
@@ -123,7 +122,7 @@ export default {
               console.log(email.value);
               console.log(feedbackBody.value);
 
-              let response = await fetch('http://localhost:4000/feedback', {
+              let response = await fetch('http://158.101.115.160:3000/feedback', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json'

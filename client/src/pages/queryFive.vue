@@ -228,9 +228,9 @@ export default {
       console.log("percent_formatted: " + percent_formatted);
       try {
         let response = await fetch(
-          // `http://localhost:4000/q5?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
-          // `http://localhost:4000/q5?startYear=${this.percentile}&endYear=${this.year_range.min}&percentile=${this.year_range.max}`
-          `http://localhost:4000/q5?percentile=${percent_formatted}&startYear=${this.year_range.min}&endYear=${this.year_range.max}`
+          // `http://158.101.115.160:4000/q5?startYear=${this.year_range.min}&endYear=${this.year_range.max}`
+          // `http://158.101.115.160:4000/q5?startYear=${this.percentile}&endYear=${this.year_range.min}&percentile=${this.year_range.max}`
+          `http://158.101.115.160:3000/q5?percentile=${percent_formatted}&startYear=${this.year_range.min}&endYear=${this.year_range.max}`
         );
         let data = await response.json();
         this.dataFromOracle = data;
