@@ -24,7 +24,13 @@ start instance
 
 update yum
 
-install gh cli ? instead of this I used scp to copy the repo to the instance]
+install gh cli  
+```
+sudo dnf install 'dnf-command(config-manager)'
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf install gh
+```
+`sudo dnf update gh`
 
 install node  
 `dnf module install nodejs:18/common`
@@ -38,7 +44,7 @@ install dependencies
 ./client `yarn install`
 
 install oralce instance client  
-`sudo yum install oracle-instantclient12.2-basiclite-12.2.0.1.0-1.x86_64.rpm`
+`sudo yum install oracle-instantclient-basiclite-21.12.0.0.0-1.el8.x86_64.rpm`
 
 ???
 
