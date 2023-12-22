@@ -68,9 +68,9 @@ if (debug) {testDB()};
 
 const fs = require("fs");
 
-connection = await oracledb.getConnection(connectionConfig);
 async function runQuery1(start, end) {
   let connection;
+  connection = await oracledb.getConnection(connectionConfig);
   let result;
   try {
     console.log("Successfully connected to Oracle!");
