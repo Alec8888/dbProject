@@ -40,7 +40,7 @@ app.use(function (req, res, next) {
 
 async function testDB() {
   console.log("Testing DB connection...");
-  oracledb.initOracleClient({ libDir: "/home/alec/oracle/oracle_client/instantclient_21_12" });
+  oracledb.initOracleClient({ libDir: "/usr/lib/oracle/21/client64/lib/" });
   let connection;
   let result;
   try {
