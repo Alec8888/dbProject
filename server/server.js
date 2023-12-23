@@ -362,8 +362,8 @@ async function countTuples() {
 }
 
 app.use(express.static("../client/dist/spa/"));
-const server = app.listen(3000, '0.0.0.0', () => {
-  console.log("server started at localhost:3000");
+const server = app.listen(443, '0.0.0.0', () => {
+  console.log("server started at localhost:443");
 });
 
 app.get("/q3/teams_in_range", async (req, res) => {
