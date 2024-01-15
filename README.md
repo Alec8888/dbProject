@@ -1,6 +1,6 @@
 # Database Project
 
-Currently deployed to my (Alec) Oracle Cloud DB and compute instance.
+Currently deployed to my (Alec) Oracle Cloud DB and compute instance. See the Oracle deployment branch for the changes made after project completion to migrate the app and db to my (Alec) personal Oracle Cloud for public distribution.
 
 ### Contributors
 
@@ -11,7 +11,7 @@ Currently deployed to my (Alec) Oracle Cloud DB and compute instance.
 
 ### What this app does
 
-Five visualiations of baseball statistical data. 
+Five visualizations of baseball statistical data. 
 
 ### Front End
 
